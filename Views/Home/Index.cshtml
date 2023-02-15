@@ -1,8 +1,144 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+	ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="position-relative">
+	<h1 class="display-4">Dashboard</h1>
+
+	<div>
+		<div class="m-5">
+			<button type="button" class="btn btn-lg pfr-btn me-5">Créer un candidat</button>
+			<button type="button" class="btn btn-lg pfr-btn">Créer un quizz</button>
+		</div>
+		<p class="m-2" style="width:700px;">Biscuit jelly marshmallow candy cotton candy. Marshmallow cheesecake pudding muffin dessert pudding chocolate. Cotton candy danish cupcake donut macaroon cheesecake. Danish chocolate cake jelly-o shortbread cookie fruitcake muffin lemon drops. </p>
+		<img src="~/img/dashboard-img.png" alt="dashboard image" class="position-absolute top-0 end-0" />
+	</div>
+
+	<div class="m-2" style="height:20px"></div>
+
+	<div class="d-flex">
+
+		<div style="width:100%" class="m-2">
+			<h5>Les 5 derniers candidats...</h5>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Prénom</th>
+						<th scope="col">Nom</th>
+						<th scope="col">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row">1</th>
+						<td>Mark</td>
+						<td>Otto</td>
+						<td>
+							<button type="button" class="btn btn-sm btn-success"><i class="bi bi-pencil-fill"></i></button>
+							<button type="button" class="btn btn-sm btn-danger"><i class="bi bi-x-lg"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">2</th>
+						<td>Jacob</td>
+						<td>Thornton</td>
+						<td>
+							<button type="button" class="btn btn-sm btn-success"><i class="bi bi-pencil-fill"></i></button>
+							<button type="button" class="btn btn-sm btn-danger"><i class="bi bi-x-lg"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">3</th>
+						<td>Jacob</td>
+						<td>Thornton</td>
+						<td>
+							<button type="button" class="btn btn-sm btn-success"><i class="bi bi-pencil-fill"></i></button>
+							<button type="button" class="btn btn-sm btn-danger"><i class="bi bi-x-lg"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">4</th>
+						<td>Jacob</td>
+						<td>Thornton</td>
+						<td>
+							<button type="button" class="btn btn-sm btn-success"><i class="bi bi-pencil-fill"></i></button>
+							<button type="button" class="btn btn-sm btn-danger"><i class="bi bi-x-lg"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">5</th>
+						<td>Jacob</td>
+						<td>Thornton</td>
+						<td>
+							<button type="button" class="btn btn-sm btn-success"><i class="bi bi-pencil-fill"></i></button>
+							<button type="button" class="btn btn-sm btn-danger"><i class="bi bi-x-lg"></i></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div style="width:100%" class="m-2">
+			<h5>Les 5 derniers questionnaires...</h5>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Intitulé</th>
+						<th scope="col">Niveau</th>
+						<th scope="col">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row">1</th>
+						<td class="pfr-truncate">Bonbon cotton candy gingerbread</td>
+						<td>Junior</td>
+						<td>
+							<button type="button" class="btn btn-sm btn-success"><i class="bi bi-pencil-fill"></i></button>
+							<button type="button" class="btn btn-sm btn-danger"><i class="bi bi-x-lg"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">2</th>
+						<td class="pfr-truncate">Sweet caramels jujubes ice cream</td>
+						<td>Intermédiaire</td>
+						<td>
+							<button type="button" class="btn btn-sm btn-success"><i class="bi bi-pencil-fill"></i></button>
+							<button type="button" class="btn btn-sm btn-danger"><i class="bi bi-x-lg"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">3</th>
+						<td class="pfr-truncate">Wafer gummi bears candy canes</td>
+						<td>Intermédiaire</td>
+						<td>
+							<button type="button" class="btn btn-sm btn-success"><i class="bi bi-pencil-fill"></i></button>
+							<button type="button" class="btn btn-sm btn-danger"><i class="bi bi-x-lg"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">4</th>
+						<td class="pfr-truncate">Gingerbread jelly beans candy canes donut</td>
+						<td>Intermédiaire</td>
+						<td>
+							<button type="button" class="btn btn-sm btn-success"><i class="bi bi-pencil-fill"></i></button>
+							<button type="button" class="btn btn-sm btn-danger"><i class="bi bi-x-lg"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">5</th>
+						<td class="pfr-truncate">Gummi bears bear claw biscuit</td>
+						<td>Intermédiaire</td>
+						<td>
+							<button type="button" class="btn btn-sm btn-success"><i class="bi bi-pencil-fill"></i></button>
+							<button type="button" class="btn btn-sm btn-danger"><i class="bi bi-x-lg"></i></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
 </div>

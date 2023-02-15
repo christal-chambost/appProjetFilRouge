@@ -1,0 +1,100 @@
+﻿:root {
+    --colorLight: 244,244,244;
+    --colorDark: 49,49,49;
+    --colorPrimary: 64,80,149;
+    --colorSecondary: 231,145,73;
+}
+
+
+html, body {
+    font-size: 14px;
+    color: rgba(var(--colorDark),1);
+    width: 100vw;
+    height: 100vh;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+.pfr-logo {
+    font-size: 25px;
+    font-family: sans-serif;
+    padding: 1em;
+    letter-spacing: 1px;
+    color: rgba(var(--colorLight),1);
+}
+
+    .pfr-logo a {
+        text-decoration: none;
+        color: rgba(var(--colorLight),1);
+    }
+
+.pfr-bg {
+    background-color: rgba(var(--colorPrimary),1);
+}
+
+.pfr-text-light {
+    color: rgba(var(--colorLight),0.8);
+}
+
+.pfr-text-blue {
+    color: rgba(var(--colorPrimary),1);
+}
+
+h1 {
+    padding-left: 1em;
+    cursor: default;
+}
+
+    h1::before {
+        content: '';
+        background-color: rgba(var(--colorSecondary),1);
+        border-radius: 0.25em;
+        display: block;
+        height: 5px;
+        width: 200px;
+        margin-top: 0.2em;
+    }
+
+a, a:visited {
+    color: rgba(var(--colorDark),0.8);
+    text-decoration: none;
+}
+
+.pfr-param {
+    color: rgba(var(--colorSecondary), 1);
+}
+
+    .pfr-param:hover {
+        color: rgba(var(--colorLight), 1);
+    }
+
+.pfr-truncate {
+    display: block;
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pfr-btn {
+    background-color: rgba(var(--colorPrimary),0.9);
+    color: rgba(var(--colorLight),0.9);
+}
+
+    .pfr-btn:hover {
+        background-color: rgba(var(--colorPrimary),1);
+        color: rgba(var(--colorLight),1);
+    }

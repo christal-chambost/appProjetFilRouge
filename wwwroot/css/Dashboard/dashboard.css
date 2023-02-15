@@ -1,0 +1,66 @@
+﻿.pfr-main {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(var(--colorPrimary),1);
+}
+
+    pfr-main .nav-link, .pfr-main .nav-link:visited, .nav-link:active {
+        color: rgba(var(--colorLight),0.8);
+        text-decoration: none;
+    }
+
+.pfr-bg-light-radius {
+    background-color: rgba(var(--colorLight),1);
+    -webkit-border-top-left-radius: 30px;
+    -webkit-border-bottom-left-radius: 30px;
+    -moz-border-radius-topleft: 30px;
+    -moz-border-radius-bottomleft: 30px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.pfr-userprofil i {
+    position: absolute;
+    left: 55px;
+    top: 60px;
+}
+
+.pfr-navbar {
+    width: 100%;
+}
+
+.pfr-navbar {
+    display: flex;
+    align-items: center;
+    color: rgba(var(--colorLight),0.8);
+}
+
+    .pfr-navbar li:hover {
+        background-color: rgba(var(--colorLight),0.7);
+        border-left: 4px solid rgba(var(--colorSecondary),1);
+        transition: 0.3s ease-in;
+    }
+
+.pfr-navlink:hover span, .pfr-navlink:hover i {
+    color: rgba(var(--colorPrimary),1);
+}
+
+.nav-item span {
+    padding-left: 0.5em;
+    font-variant: small-caps;
+    text-transform: lowercase;
+    font-size: 20px;
+}
+
+.nav-item {
+    width: 100%;
+}
+
+.pfr-logout {
+    font-size: 14px;
+    margin: 1em;
+}
+
+.pfr-navbar-content a {
+    color: red;
+}
