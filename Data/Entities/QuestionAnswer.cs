@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AppProjetFilRouge.Data.Entities;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CodeFirst.Data.Entities
@@ -17,5 +18,7 @@ namespace CodeFirst.Data.Entities
 		public bool IsCorrect { get; set; }
 
 		public virtual ICollection<Question> Questions { get; set; } = null!;
+
+		public virtual ICollection<UserAnswer> UserAnswers { get; set; } = null!;
 	}
 }

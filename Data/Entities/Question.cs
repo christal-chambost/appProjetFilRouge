@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AppProjetFilRouge.Data.Entities;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CodeFirst.Data.Entities
@@ -25,6 +26,19 @@ namespace CodeFirst.Data.Entities
 		[ForeignKey(nameof(TechnologyId))]
 		public int TechnologyId { get; set; }
 
-		public Technology Technologies { get; set; } = null!;
+		public Technology Technology { get; set; } = null!;
+
+		////// A DEBUGER
+		public int QuizId { get; set; }
+		public Quiz Quiz { get; set; } = null!;
+
+		[ForeignKey(nameof(QuestionTypeId))]
+		public int QuestionTypeId { get; set; }
+
+		public QuestionType QuestionType { get; set; } = null!;
+
+		[ForeignKey(nameof(UserAnswerId))]
+		public int UserAnswerId { get; set; }
+		public UserAnswer UserAnswer { get; set; } = null!;
 	}
 }
