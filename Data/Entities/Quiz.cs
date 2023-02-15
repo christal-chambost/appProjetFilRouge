@@ -3,11 +3,21 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CodeFirst.Data.Entities
 {
-    [Table("quizzes")]
-    public class Quiz
-    {
-        [Key]
-        [Column("quiz_id")]
-        public int QuizId { get; set; }
-    }
+	[Table("quizzes")]
+	public class Quiz
+	{
+		[Key]
+		[Column("quiz_id")]
+		public int QuizId { get; set; }
+
+		//[Required]
+		//[Column("name", TypeName = "varchar(500)")]
+		//public string Name { get; set; } = null!;
+
+		[ForeignKey(nameof(TechnologyId))]
+		public int TechnologyId { get; set; }
+
+		public Technology Technology { get; set; } = null!;
+
+	}
 }
