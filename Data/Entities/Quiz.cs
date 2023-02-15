@@ -19,5 +19,11 @@ namespace CodeFirst.Data.Entities
 
 		public Technology Technology { get; set; } = null!;
 
+		[ForeignKey(nameof(LevelId))]
+		public int LevelId { get; set; }
+
+		public Level Level { get; set; } = null!;
+
+
 	}
 }

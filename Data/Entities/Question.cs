@@ -17,6 +17,14 @@ namespace CodeFirst.Data.Entities
 		public int QuestionAnswerId { get; set; }
 		public QuestionAnswer QuestionAnswer { get; set; } = null!;
 
+		[ForeignKey(nameof(LevelId))]
+		public int LevelId { get; set; }
 
+		public Level Level { get; set; } = null!;
+
+		[ForeignKey(nameof(TechnologyId))]
+		public int TechnologyId { get; set; }
+
+		public Technology Technology { get; set; } = null!;
 	}
 }
