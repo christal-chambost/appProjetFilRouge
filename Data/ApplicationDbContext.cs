@@ -23,6 +23,7 @@ namespace AppProjetFilRouge.Data
 		public DbSet<QuestionAnswer> QuestionAnswers { get; set; }
 		public DbSet<Quiz> Quizzes { get; set; }
 		public DbSet<QuizResult> QuizResults { get; set; }
+		public DbSet<UserAnswer> UserAnswers { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{

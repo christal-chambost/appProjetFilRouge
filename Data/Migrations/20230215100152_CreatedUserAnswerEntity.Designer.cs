@@ -4,6 +4,7 @@ using AppProjetFilRouge.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppProjetFilRouge.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230215100152_CreatedUserAnswerEntity")]
+    partial class CreatedUserAnswerEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -448,7 +451,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
             modelBuilder.Entity("CodeFirst.Data.Entities.Question", b =>
                 {
-                    b.HasOne("CodeFirst.Data.Entities.Level", "Levels")
+                    b.HasOne("CodeFirst.Data.Entities.Level", "Level")
                         .WithMany("Questions")
                         .HasForeignKey("LevelId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -460,36 +463,36 @@ namespace AppProjetFilRouge.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CodeFirst.Data.Entities.Technology", "Technologies")
+                    b.HasOne("CodeFirst.Data.Entities.Technology", "Technology")
                         .WithMany("Questions")
                         .HasForeignKey("TechnologyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Levels");
+                    b.Navigation("Level");
 
                     b.Navigation("QuestionAnswer");
 
-                    b.Navigation("Technologies");
+                    b.Navigation("Technology");
                 });
 
             modelBuilder.Entity("CodeFirst.Data.Entities.Quiz", b =>
                 {
-                    b.HasOne("CodeFirst.Data.Entities.Level", "Levels")
+                    b.HasOne("CodeFirst.Data.Entities.Level", "Level")
                         .WithMany("Quizzes")
                         .HasForeignKey("LevelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CodeFirst.Data.Entities.Technology", "Technologies")
+                    b.HasOne("CodeFirst.Data.Entities.Technology", "Technology")
                         .WithMany("Quizzes")
                         .HasForeignKey("TechnologyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Levels");
+                    b.Navigation("Level");
 
-                    b.Navigation("Technologies");
+                    b.Navigation("Technology");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

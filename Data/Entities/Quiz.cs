@@ -17,12 +17,12 @@ namespace CodeFirst.Data.Entities
 		[ForeignKey(nameof(TechnologyId))]
 		public int TechnologyId { get; set; }
 
-		public Technology Technology { get; set; } = null!;
+		public Technology Technologies { get; set; } = null!;
 
 		[ForeignKey(nameof(LevelId))]
 		public int LevelId { get; set; }
 
-		public Level Level { get; set; } = null!;
+		public Level Levels { get; set; } = null!;
 
 
 	}

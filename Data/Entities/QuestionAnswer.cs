@@ -16,6 +16,6 @@ namespace CodeFirst.Data.Entities
 		// column type bit pour simuler le boolean pour isCorrect
 		public bool IsCorrect { get; set; }
 
-		public virtual ICollection<Question> Questions { get; set; }
+		public virtual ICollection<Question> Questions { get; set; } = null!;
 	}
 }
