@@ -4,6 +4,7 @@ using AppProjetFilRouge.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppProjetFilRouge.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230215100824_FixedEntities")]
+    partial class FixedEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -95,16 +98,7 @@ namespace AppProjetFilRouge.Data.Migrations
                     b.Property<int>("QuestionAnswerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("QuestionTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuizId")
-                        .HasColumnType("int");
-
                     b.Property<int>("TechnologyId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserAnswerId")
                         .HasColumnType("int");
 
                     b.HasKey("Questionid");
@@ -113,13 +107,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasIndex("QuestionAnswerId");
 
-                    b.HasIndex("QuestionTypeId");
-
-                    b.HasIndex("QuizId");
-
                     b.HasIndex("TechnologyId");
-
-                    b.HasIndex("UserAnswerId");
 
                     b.ToTable("questions");
                 });
@@ -176,11 +164,6 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.Property<int>("LevelId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("varchar(500)")
-                        .HasColumnName("name");
 
                     b.Property<int>("TechnologyId")
                         .HasColumnType("int");
@@ -441,21 +424,6 @@ namespace AppProjetFilRouge.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("QuestionAnswerUserAnswer", b =>
-                {
-                    b.Property<int>("QuestionAnswersQuestionAnswerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserAnswersUserAnswerId")
-                        .HasColumnType("int");
-
-                    b.HasKey("QuestionAnswersQuestionAnswerId", "UserAnswersUserAnswerId");
-
-                    b.HasIndex("UserAnswersUserAnswerId");
-
-                    b.ToTable("QuestionAnswerUserAnswer");
-                });
-
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -495,27 +463,9 @@ namespace AppProjetFilRouge.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CodeFirst.Data.Entities.QuestionType", "QuestionType")
-                        .WithMany("Questions")
-                        .HasForeignKey("QuestionTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CodeFirst.Data.Entities.Quiz", "Quiz")
-                        .WithMany()
-                        .HasForeignKey("QuizId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CodeFirst.Data.Entities.Technology", "Technology")
+                    b.HasOne("CodeFirst.Data.Entities.Technology", "Technologies")
                         .WithMany("Questions")
                         .HasForeignKey("TechnologyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AppProjetFilRouge.Data.Entities.UserAnswer", "UserAnswer")
-                        .WithMany("Questions")
-                        .HasForeignKey("UserAnswerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -523,32 +473,26 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.Navigation("QuestionAnswer");
 
-                    b.Navigation("QuestionType");
-
-                    b.Navigation("Quiz");
-
-                    b.Navigation("Technology");
-
-                    b.Navigation("UserAnswer");
+                    b.Navigation("Technologies");
                 });
 
             modelBuilder.Entity("CodeFirst.Data.Entities.Quiz", b =>
                 {
-                    b.HasOne("CodeFirst.Data.Entities.Level", "Level")
+                    b.HasOne("CodeFirst.Data.Entities.Level", "Levels")
                         .WithMany("Quizzes")
                         .HasForeignKey("LevelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CodeFirst.Data.Entities.Technology", "Technology")
+                    b.HasOne("CodeFirst.Data.Entities.Technology", "Technologies")
                         .WithMany("Quizzes")
                         .HasForeignKey("TechnologyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Level");
+                    b.Navigation("Levels");
 
-                    b.Navigation("Technology");
+                    b.Navigation("Technologies");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -602,26 +546,6 @@ namespace AppProjetFilRouge.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("QuestionAnswerUserAnswer", b =>
-                {
-                    b.HasOne("CodeFirst.Data.Entities.QuestionAnswer", null)
-                        .WithMany()
-                        .HasForeignKey("QuestionAnswersQuestionAnswerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AppProjetFilRouge.Data.Entities.UserAnswer", null)
-                        .WithMany()
-                        .HasForeignKey("UserAnswersUserAnswerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("AppProjetFilRouge.Data.Entities.UserAnswer", b =>
-                {
-                    b.Navigation("Questions");
-                });
-
             modelBuilder.Entity("CodeFirst.Data.Entities.Level", b =>
                 {
                     b.Navigation("Questions");
@@ -630,11 +554,6 @@ namespace AppProjetFilRouge.Data.Migrations
                 });
 
             modelBuilder.Entity("CodeFirst.Data.Entities.QuestionAnswer", b =>
-                {
-                    b.Navigation("Questions");
-                });
-
-            modelBuilder.Entity("CodeFirst.Data.Entities.QuestionType", b =>
                 {
                     b.Navigation("Questions");
                 });

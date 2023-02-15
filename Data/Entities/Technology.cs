@@ -14,6 +14,8 @@ namespace CodeFirst.Data.Entities
 		[Column("name", TypeName = "varchar(200)")]
 		public string Name { get; set; } = null!;
 
-		public virtual ICollection<Quiz> Quiz { get; set; } = null!;
+		public virtual ICollection<Quiz> Quizzes { get; set; } = null!;
+
+		public virtual ICollection<Question> Questions { get; set; } = null!;
 	}
 }
