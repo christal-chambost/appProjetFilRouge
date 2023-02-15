@@ -23,9 +23,5 @@ namespace CodeFirst.Data.Entities
 		public int LevelId { get; set; }
 
 		public Level Level { get; set; } = null!;
-
-		////// A DEBUGER
-		//public int QuestionId { get; set; }
-		//public Question Question { get; set; } = null!;
 	}
 }
