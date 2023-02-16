@@ -1,0 +1,59 @@
+﻿@model List<QuestionViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Intitulé de la question
+            </th>
+            <th>
+                Niveau
+            </th>
+            <th>
+                Technologie
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Quiz
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Level.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Technology.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuestionType.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quiz.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Questionid">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Questionid">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Questionid">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
