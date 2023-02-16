@@ -95,25 +95,21 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
         }
 
         // GET: Questions/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null || _context.Questions == null)
-            {
-                return NotFound();
-            }
 
-            var question = await _context.Questions.FindAsync(id);
-            if (question == null)
+            var questionById = await _context.Questions.FindAsync(id);
+            if (questionById == null)
             {
                 return NotFound();
             }
-            ViewData["LevelId"] = new SelectList(_context.Levels, "LevelId", "Name", question.LevelId);
+            ViewData["LevelId"] = new SelectList(_context.Levels, "LevelId", "Name", questionById.LevelId);
             //ViewData["QuestionAnswerId"] = new SelectList(_context.QuestionAnswers, "QuestionAnswerId", "Name", question.QuestionAnswerId);
-            ViewData["QuestionTypeId"] = new SelectList(_context.QuestionTypes, "QuestionTypeId", "Name", question.QuestionTypeId);
-            ViewData["QuizId"] = new SelectList(_context.Quizzes, "QuizId", "Name", question.QuizId);
-            ViewData["TechnologyId"] = new SelectList(_context.Technologies, "TechnologyId", "Name", question.TechnologyId);
+            ViewData["QuestionTypeId"] = new SelectList(_context.QuestionTypes, "QuestionTypeId", "Name", questionById.QuestionTypeId);
+            ViewData["QuizId"] = new SelectList(_context.Quizzes, "QuizId", "Name", questionById.QuizId);
+            ViewData["TechnologyId"] = new SelectList(_context.Technologies, "TechnologyId", "Name", questionById.TechnologyId);
             //ViewData["UserAnswerId"] = new SelectList(_context.UserAnswers, "UserAnswerId", "UserAnswerId", question.UserAnswerId);
-            return View(question);
+            return View(CastToQuestionViewModel(questionById));
         }
 
         // POST: Questions/Edit/5
@@ -121,9 +117,12 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Questionid,Name,QuestionAnswerId,LevelId,TechnologyId,QuizId,QuestionTypeId,UserAnswerId")] Question question)
+        public async Task<IActionResult> Edit(int id, QuestionViewModel questionViewModel)
         {
-            if (id != question.Questionid)
+
+            var questionById = CastToQuestion(questionViewModel);
+
+            if (id != questionViewModel.Questionid)
             {
                 return NotFound();
             }
@@ -132,12 +131,12 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
             {
                 try
                 {
-                    _context.Update(question);
+                    _context.Update(questionById);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!QuestionExists(question.Questionid))
+                    if (!QuestionExists(questionViewModel.Questionid))
                     {
                         return NotFound();
                     }
@@ -148,37 +147,29 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LevelId"] = new SelectList(_context.Levels, "LevelId", "Name", question.LevelId);
-            //ViewData["QuestionAnswerId"] = new SelectList(_context.QuestionAnswers, "QuestionAnswerId", "Name", question.QuestionAnswerId);
-            ViewData["QuestionTypeId"] = new SelectList(_context.QuestionTypes, "QuestionTypeId", "Name", question.QuestionTypeId);
-            ViewData["QuizId"] = new SelectList(_context.Quizzes, "QuizId", "Name", question.QuizId);
-            ViewData["TechnologyId"] = new SelectList(_context.Technologies, "TechnologyId", "Name", question.TechnologyId);
-            //ViewData["UserAnswerId"] = new SelectList(_context.UserAnswers, "UserAnswerId", "UserAnswerId", question.UserAnswerId);
-            return View(question);
+            ViewData["LevelId"] = new SelectList(_context.Levels, "LevelId", "Name", questionViewModel.LevelId);
+            ViewData["QuestionTypeId"] = new SelectList(_context.QuestionTypes, "QuestionTypeId", "Name", questionViewModel.QuestionTypeId);
+            ViewData["QuizId"] = new SelectList(_context.Quizzes, "QuizId", "Name", questionViewModel.QuizId);
+            ViewData["TechnologyId"] = new SelectList(_context.Technologies, "TechnologyId", "Name", questionViewModel.TechnologyId);
+            return View(questionViewModel);
         }
 
         // GET: Questions/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null || _context.Questions == null)
-            {
-                return NotFound();
-            }
 
-            var question = await _context.Questions
+            var questionById = await _context.Questions
                 .Include(q => q.Level)
-                //.Include(q => q.QuestionAnswer)
                 .Include(q => q.QuestionType)
                 .Include(q => q.Quiz)
                 .Include(q => q.Technology)
-                //.Include(q => q.UserAnswer)
                 .FirstOrDefaultAsync(m => m.Questionid == id);
-            if (question == null)
+            if (questionById == null)
             {
                 return NotFound();
             }
 
-            return View(question);
+            return View(CastToQuestionViewModel(questionById));
         }
 
         // POST: Questions/Delete/5
@@ -190,10 +181,12 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
             {
                 return Problem("Entity set 'ApplicationDbContext.Questions'  is null.");
             }
-            var question = await _context.Questions.FindAsync(id);
-            if (question != null)
+
+            var questionById = await _context.Questions.FindAsync(id);
+
+            if (questionById != null)
             {
-                _context.Questions.Remove(question);
+                _context.Questions.Remove(questionById);
             }
             
             await _context.SaveChangesAsync();
@@ -212,9 +205,13 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
                 Name = questionViewModel.Name,
                 Questionid = questionViewModel.Questionid,
                 TechnologyId = questionViewModel.TechnologyId,
+                Technology = questionViewModel.Technology,
                 LevelId = questionViewModel.LevelId,
+                Level = questionViewModel.Level,
                 QuestionTypeId = questionViewModel.QuestionTypeId,
+                QuestionType = questionViewModel.QuestionType,
                 QuizId = questionViewModel.QuizId,
+                Quiz = questionViewModel.Quiz,
             };
             return question;
 
@@ -227,9 +224,13 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
                 Name = question.Name,
                 Questionid = question.Questionid,
                 TechnologyId = question.TechnologyId,
+                Technology = question.Technology,
                 LevelId = question.LevelId,
+                Level = question.Level,
                 QuestionTypeId = question.QuestionTypeId,
+                QuestionType= question.QuestionType,
                 QuizId = question.QuizId,
+                Quiz = question.Quiz,
 
             };
             return questionViewModel;
