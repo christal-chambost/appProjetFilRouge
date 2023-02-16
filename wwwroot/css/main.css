@@ -98,3 +98,7 @@ a, a:visited {
         background-color: rgba(var(--colorPrimary),1);
         color: rgba(var(--colorLight),1);
     }
+
+.pfr-gestionNavbar {
+    background-color: #f0f0f0;
+}

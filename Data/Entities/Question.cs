@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CodeFirst.Data.Entities
+namespace AppProjetFilRouge.Data.Entities
 {
 	[Table("questions")]
 	public class Question

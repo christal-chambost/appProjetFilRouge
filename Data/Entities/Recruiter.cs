@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace CodeFirst.Data.Entities
+namespace AppProjetFilRouge.Data.Entities
 {
     public class Recruiter : IdentityUser
     {
