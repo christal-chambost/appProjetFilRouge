@@ -25,7 +25,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CodeFirst.Data.Entities.Company", b =>
+            modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Company", b =>
                 {
                     b.Property<int>("CompanyId")
                         .ValueGeneratedOnAdd()
@@ -45,7 +45,7 @@ namespace AppProjetFilRouge.Data.Migrations
                     b.ToTable("companies");
                 });
 
-            modelBuilder.Entity("CodeFirst.Data.Entities.Level", b =>
+            modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Level", b =>
                 {
                     b.Property<int>("LevelId")
                         .ValueGeneratedOnAdd()
@@ -64,7 +64,7 @@ namespace AppProjetFilRouge.Data.Migrations
                     b.ToTable("levels");
                 });
 
-            modelBuilder.Entity("CodeFirst.Data.Entities.Question", b =>
+            modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Question", b =>
                 {
                     b.Property<int>("Questionid")
                         .ValueGeneratedOnAdd()
@@ -98,7 +98,7 @@ namespace AppProjetFilRouge.Data.Migrations
                     b.ToTable("questions");
                 });
 
-            modelBuilder.Entity("CodeFirst.Data.Entities.QuestionAnswer", b =>
+            modelBuilder.Entity("AppProjetFilRouge.Data.Entities.QuestionAnswer", b =>
                 {
                     b.Property<int>("QuestionAnswerId")
                         .ValueGeneratedOnAdd()
@@ -120,7 +120,7 @@ namespace AppProjetFilRouge.Data.Migrations
                     b.ToTable("questionAnswers");
                 });
 
-            modelBuilder.Entity("CodeFirst.Data.Entities.QuestionType", b =>
+            modelBuilder.Entity("AppProjetFilRouge.Data.Entities.QuestionType", b =>
                 {
                     b.Property<int>("QuestionTypeId")
                         .ValueGeneratedOnAdd()
@@ -139,7 +139,7 @@ namespace AppProjetFilRouge.Data.Migrations
                     b.ToTable("questionTypes");
                 });
 
-            modelBuilder.Entity("CodeFirst.Data.Entities.Quiz", b =>
+            modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Quiz", b =>
                 {
                     b.Property<int>("QuizId")
                         .ValueGeneratedOnAdd()
@@ -163,7 +163,7 @@ namespace AppProjetFilRouge.Data.Migrations
                     b.ToTable("quizzes");
                 });
 
-            modelBuilder.Entity("CodeFirst.Data.Entities.QuizResult", b =>
+            modelBuilder.Entity("AppProjetFilRouge.Data.Entities.QuizResult", b =>
                 {
                     b.Property<int>("QuizResultId")
                         .ValueGeneratedOnAdd()
@@ -181,7 +181,7 @@ namespace AppProjetFilRouge.Data.Migrations
                     b.ToTable("quizResult");
                 });
 
-            modelBuilder.Entity("CodeFirst.Data.Entities.Technology", b =>
+            modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Technology", b =>
                 {
                     b.Property<int>("TechnologyId")
                         .ValueGeneratedOnAdd()
@@ -435,21 +435,21 @@ namespace AppProjetFilRouge.Data.Migrations
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
-            modelBuilder.Entity("CodeFirst.Data.Entities.Question", b =>
+            modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Question", b =>
                 {
-                    b.HasOne("CodeFirst.Data.Entities.Level", "Level")
+                    b.HasOne("AppProjetFilRouge.Data.Entities.Level", "Level")
                         .WithMany("Questions")
                         .HasForeignKey("LevelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CodeFirst.Data.Entities.QuestionAnswer", "QuestionAnswer")
+                    b.HasOne("AppProjetFilRouge.Data.Entities.QuestionAnswer", "QuestionAnswer")
                         .WithMany("Questions")
                         .HasForeignKey("QuestionAnswerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CodeFirst.Data.Entities.Technology", "Technology")
+                    b.HasOne("AppProjetFilRouge.Data.Entities.Technology", "Technology")
                         .WithMany("Questions")
                         .HasForeignKey("TechnologyId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -462,15 +462,15 @@ namespace AppProjetFilRouge.Data.Migrations
                     b.Navigation("Technology");
                 });
 
-            modelBuilder.Entity("CodeFirst.Data.Entities.Quiz", b =>
+            modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Quiz", b =>
                 {
-                    b.HasOne("CodeFirst.Data.Entities.Level", "Level")
+                    b.HasOne("AppProjetFilRouge.Data.Entities.Level", "Level")
                         .WithMany("Quizzes")
                         .HasForeignKey("LevelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CodeFirst.Data.Entities.Technology", "Technology")
+                    b.HasOne("AppProjetFilRouge.Data.Entities.Technology", "Technology")
                         .WithMany("Quizzes")
                         .HasForeignKey("TechnologyId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -532,19 +532,19 @@ namespace AppProjetFilRouge.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CodeFirst.Data.Entities.Level", b =>
+            modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Level", b =>
                 {
                     b.Navigation("Questions");
 
                     b.Navigation("Quizzes");
                 });
 
-            modelBuilder.Entity("CodeFirst.Data.Entities.QuestionAnswer", b =>
+            modelBuilder.Entity("AppProjetFilRouge.Data.Entities.QuestionAnswer", b =>
                 {
                     b.Navigation("Questions");
                 });
 
-            modelBuilder.Entity("CodeFirst.Data.Entities.Technology", b =>
+            modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Technology", b =>
                 {
                     b.Navigation("Questions");
 

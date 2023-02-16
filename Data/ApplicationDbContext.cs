@@ -1,5 +1,5 @@
 ﻿using AppProjetFilRouge.Data.Entities;
-using CodeFirst.Data.Entities;
+using AppProjetFilRouge.Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

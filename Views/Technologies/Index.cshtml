@@ -1,0 +1,34 @@
+﻿@model List<TechnologyViewModel>
+
+@{
+    ViewData["Title"] = "Gestion technologie";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Ajout d'une technologie</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nom de la technologie
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.TechnologyId">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.TechnologyId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

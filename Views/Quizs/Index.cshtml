@@ -1,0 +1,42 @@
+﻿@model List<QuizzViewModel>
+
+@{
+    ViewData["Title"] = "Gestion des quiz";
+}
+
+<h1 class="display-4">Gestion des quiz</h1>
+
+<div class="pfr-gestionNavbar d-flex justify-content-center m-5 p-4">
+    <a asp-action="Create" class="btn pfr-btn me-5 text-white">Ajout d'un quiz</a>
+    <a asp-area="" asp-controller="Technologies" asp-action="Index" class="btn pfr-btn me-5 text-white">Gestion des technologies</a>
+    <a asp-area="" asp-controller="Levels" asp-action="Index" class="btn pfr-btn me-5 text-white">Gestion des niveaux</a>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Intitulé du quiz</th>
+            <th scope="col">Technologie</th>
+            <th scope="col">Niveau</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+          @foreach (var item in Model)
+        {
+        <tr>
+            <th scope="row">@Html.DisplayFor(modelItem => item.QuizId)</th>
+            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.Technology.Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.Level.Name)</td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.QuizId" class="btn btn-sm btn-success text-white"><i class="bi bi-pencil-fill"></i></a>
+                    <a asp-action="Details" asp-route-id="@item.QuizId" class="btn btn-sm btn-warning text-white"><i class="bi bi-menu-button-fill"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.QuizId" class="btn btn-sm btn-danger text-white"><i class="bi bi-x-lg"></i></a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
