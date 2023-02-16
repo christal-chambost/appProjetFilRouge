@@ -4,6 +4,7 @@ using AppProjetFilRouge.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppProjetFilRouge.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230215110127_LinkUserAnswerAndQtAnswer")]
+    partial class LinkUserAnswerAndQtAnswer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,9 +101,6 @@ namespace AppProjetFilRouge.Data.Migrations
                     b.Property<int>("QuestionTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("QuizId")
-                        .HasColumnType("int");
-
                     b.Property<int>("TechnologyId")
                         .HasColumnType("int");
 
@@ -114,8 +114,6 @@ namespace AppProjetFilRouge.Data.Migrations
                     b.HasIndex("QuestionAnswerId");
 
                     b.HasIndex("QuestionTypeId");
-
-                    b.HasIndex("QuizId");
 
                     b.HasIndex("TechnologyId");
 
@@ -501,12 +499,6 @@ namespace AppProjetFilRouge.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CodeFirst.Data.Entities.Quiz", "Quiz")
-                        .WithMany()
-                        .HasForeignKey("QuizId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("CodeFirst.Data.Entities.Technology", "Technology")
                         .WithMany("Questions")
                         .HasForeignKey("TechnologyId")
@@ -524,8 +516,6 @@ namespace AppProjetFilRouge.Data.Migrations
                     b.Navigation("QuestionAnswer");
 
                     b.Navigation("QuestionType");
-
-                    b.Navigation("Quiz");
 
                     b.Navigation("Technology");
 
