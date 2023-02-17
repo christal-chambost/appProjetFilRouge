@@ -4,40 +4,48 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Edition du quiz</h1>
 
-<h4>Quiz</h4>
 <hr />
-<div class="row">
+
+<div class="row d-flex justify-content-center">
     <div class="col-md-4">
+
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="QuizId" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+
+            <div class="form-group my-3">
+                <label asp-for="Name" class="control-label fw-bold"></label>
+                <input asp-for="Name" class="form-control"/>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="TechnologyId" class="control-label"></label>
+
+            <div class="form-group my-3">
+                <label asp-for="TechnologyId" class="control-label fw-bold"></label>
                 <select asp-for="TechnologyId" class="form-control" asp-items="ViewBag.TechnologyId"></select>
                 <span asp-validation-for="TechnologyId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="LevelId" class="control-label"></label>
+
+            <div class="form-group my-3">
+                <label asp-for="LevelId" class="control-label fw-bold"></label>
                 <select asp-for="LevelId" class="form-control" asp-items="ViewBag.LevelId"></select>
                 <span asp-validation-for="LevelId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+
+             <hr />
+
+            <div class="form-group my-3">
+                <input type="submit" value="Sauvegarder" class="btn btn-primary mt-3 text-white" />
+                <a asp-action="Index" class="btn btn-primary mt-3 text-white">Gestion du Quiz</a>
             </div>
+
         </form>
     </div>
 </div>
+<hr />
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

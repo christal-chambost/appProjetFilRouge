@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace AppProjetFilRouge.Models
 {
@@ -12,15 +13,24 @@ namespace AppProjetFilRouge.Models
         public int QuizId { get; set; }
 
         [Required]
+        [DisplayName("Nom du Quiz")]
         [Column("name", TypeName = "varchar(500)")]
-        public string? Name { get; set; } 
+        public string? Name { get; set; }
 
+        [Required]
+        [DisplayName("Technologie")]
+        [Column("name", TypeName = "varchar(500)")]
         [ForeignKey(nameof(TechnologyId))]
         public int TechnologyId { get; set; }
+
 
         public Technology? Technology { get; set; } 
 
         [ForeignKey(nameof(LevelId))]
+
+        [Required]
+        [DisplayName("Niveaux")]
+        [Column("name", TypeName = "varchar(500)")]
         public int LevelId { get; set; }
 
         public Level? Level { get; set; } 
