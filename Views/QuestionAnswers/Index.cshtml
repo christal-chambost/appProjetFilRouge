@@ -1,0 +1,48 @@
+﻿@model List<QuestionAnswerViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Intitulé du choix
+            </th>
+            <th>
+               est une bonne réponse ?
+            </th>
+            <th>
+              Question
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsCorrect)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Question.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.QuestionAnswerId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.QuestionAnswerId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.QuestionAnswerId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

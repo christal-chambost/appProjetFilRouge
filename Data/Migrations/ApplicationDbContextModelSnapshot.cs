@@ -123,12 +123,12 @@ namespace AppProjetFilRouge.Data.Migrations
                         .HasColumnType("varchar(5000)")
                         .HasColumnName("text");
 
-                    b.Property<int>("Questionid")
+                    b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
                     b.HasKey("QuestionAnswerId");
 
-                    b.HasIndex("Questionid");
+                    b.HasIndex("QuestionId");
 
                     b.ToTable("questionAnswers");
                 });
@@ -511,7 +511,7 @@ namespace AppProjetFilRouge.Data.Migrations
                 {
                     b.HasOne("AppProjetFilRouge.Data.Entities.Question", "Question")
                         .WithMany("QuestionAnswers")
-                        .HasForeignKey("Questionid")
+                        .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

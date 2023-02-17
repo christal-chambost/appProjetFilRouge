@@ -23,7 +23,12 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
         // GET: Questions
         public async Task<IActionResult> Index()
         {
-            var questionsList = await _context.Questions.Include(q => q.Level).Include(q => q.QuestionType).Include(q => q.Quiz).Include(q => q.Technology).ToListAsync();
+            var questionsList = await _context.Questions
+                .Include(q => q.Level)
+                .Include(q => q.QuestionType)
+                .Include(q => q.Quiz)
+                .Include(q => q.Technology)
+                .ToListAsync();
 
             var listQuestionsViewModel = new List<QuestionViewModel>();
 
@@ -45,11 +50,9 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
 
             var question = await _context.Questions
                 .Include(q => q.Level)
-                //.Include(q => q.QuestionAnswer)
                 .Include(q => q.QuestionType)
                 .Include(q => q.Quiz)
                 .Include(q => q.Technology)
-                //.Include(q => q.UserAnswer)
                 .FirstOrDefaultAsync(m => m.Questionid == id);
             if (question == null)
             {
@@ -83,14 +86,12 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
             {
                 _context.Add(question);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Create", "QuestionAnswers", new { id = questionViewModel.QuestionTypeId });
             }
             ViewData["LevelId"] = new SelectList(_context.Levels, "LevelId", "Name", questionViewModel.LevelId);
-            //ViewData["QuestionAnswerId"] = new SelectList(_context.QuestionAnswers, "QuestionAnswerId", "Name", question.QuestionAnswerId);
             ViewData["QuestionTypeId"] = new SelectList(_context.QuestionTypes, "QuestionTypeId", "Name", questionViewModel.QuestionTypeId);
             ViewData["QuizId"] = new SelectList(_context.Quizzes, "QuizId", "Name", questionViewModel.QuizId);
             ViewData["TechnologyId"] = new SelectList(_context.Technologies, "TechnologyId", "Name", questionViewModel.TechnologyId);
-            //ViewData["UserAnswerId"] = new SelectList(_context.UserAnswers, "UserAnswerId", "UserAnswerId", question.UserAnswerId);
             return View(question);
         }
 
@@ -104,11 +105,9 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
                 return NotFound();
             }
             ViewData["LevelId"] = new SelectList(_context.Levels, "LevelId", "Name", questionById.LevelId);
-            //ViewData["QuestionAnswerId"] = new SelectList(_context.QuestionAnswers, "QuestionAnswerId", "Name", question.QuestionAnswerId);
             ViewData["QuestionTypeId"] = new SelectList(_context.QuestionTypes, "QuestionTypeId", "Name", questionById.QuestionTypeId);
             ViewData["QuizId"] = new SelectList(_context.Quizzes, "QuizId", "Name", questionById.QuizId);
             ViewData["TechnologyId"] = new SelectList(_context.Technologies, "TechnologyId", "Name", questionById.TechnologyId);
-            //ViewData["UserAnswerId"] = new SelectList(_context.UserAnswers, "UserAnswerId", "UserAnswerId", question.UserAnswerId);
             return View(CastToQuestionViewModel(questionById));
         }
 
