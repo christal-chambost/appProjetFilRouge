@@ -15,30 +15,38 @@ namespace AppProjetFilRouge.Data.Entities
 		[Column("name", TypeName = "varchar(1000)")]
 		public string Name { get; set; } = null!;
 
-		public int QuestionAnswerId { get; set; }
-		public QuestionAnswer QuestionAnswer { get; set; } = null!;
+		//public int QuestionAnswerId { get; set; }
+		//public QuestionAnswer QuestionAnswer { get; set; } = null!;
 
 		[ForeignKey(nameof(LevelId))]
 		public int LevelId { get; set; }
 
-		public Level Levels { get; set; } = null!;
+		public Level Level { get; set; } = null!;
+
 
 		[ForeignKey(nameof(TechnologyId))]
 		public int TechnologyId { get; set; }
 
 		public Technology Technology { get; set; } = null!;
 
-		////// A DEBUGER
-		public int QuizId { get; set; }
+
+        [ForeignKey(nameof(QuizId))]
+        public int QuizId { get; set; }
 		public Quiz Quiz { get; set; } = null!;
+
 
 		[ForeignKey(nameof(QuestionTypeId))]
 		public int QuestionTypeId { get; set; }
-
 		public QuestionType QuestionType { get; set; } = null!;
 
-		[ForeignKey(nameof(UserAnswerId))]
-		public int UserAnswerId { get; set; }
-		public UserAnswer UserAnswer { get; set; } = null!;
-	}
+		public string? CommentUser { get; set; } 
+
+        public string? Correction { get; set; } 
+
+        public virtual ICollection<QuestionAnswer> QuestionAnswers { get; set; } = null!;
+
+        //[ForeignKey(nameof(UserAnswerId))]
+        //public int UserAnswerId { get; set; }
+        //public UserAnswer UserAnswer { get; set; } = null!;
+    }
 }
