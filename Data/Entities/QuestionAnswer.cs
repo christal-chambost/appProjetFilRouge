@@ -14,11 +14,9 @@ namespace AppProjetFilRouge.Data.Entities
 		[Required]
 		[Column("text", TypeName = "varchar(5000)")]
 		public string Name { get; set; } = null!;
-		// column type bit pour simuler le boolean pour isCorrect
 		public bool IsCorrect { get; set; }
 
-		public virtual ICollection<Question> Questions { get; set; } = null!;
-
-		public virtual ICollection<UserAnswer> UserAnswers { get; set; } = null!;
-	}
+        public int QuestionId { get; set; }
+        public Question Question { get; set; } = null!;
+    }
 }

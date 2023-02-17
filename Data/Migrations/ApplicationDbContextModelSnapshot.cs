@@ -17,24 +17,10 @@ namespace AppProjetFilRouge.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.2")
+                .HasAnnotation("ProductVersion", "7.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("AppProjetFilRouge.Data.Entities.UserAnswer", b =>
-                {
-                    b.Property<int>("UserAnswerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("userAnswer_id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserAnswerId"));
-
-                    b.HasKey("UserAnswerId");
-
-                    b.ToTable("userAnswer");
-                });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Company", b =>
                 {
@@ -84,6 +70,12 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Questionid"));
 
+                    b.Property<string>("CommentUser")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Correction")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("LevelId")
                         .HasColumnType("int");
 
@@ -91,9 +83,6 @@ namespace AppProjetFilRouge.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(1000)")
                         .HasColumnName("name");
-
-                    b.Property<int>("QuestionAnswerId")
-                        .HasColumnType("int");
 
                     b.Property<int>("QuestionTypeId")
                         .HasColumnType("int");
@@ -104,22 +93,15 @@ namespace AppProjetFilRouge.Data.Migrations
                     b.Property<int>("TechnologyId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserAnswerId")
-                        .HasColumnType("int");
-
                     b.HasKey("Questionid");
 
                     b.HasIndex("LevelId");
-
-                    b.HasIndex("QuestionAnswerId");
 
                     b.HasIndex("QuestionTypeId");
 
                     b.HasIndex("QuizId");
 
                     b.HasIndex("TechnologyId");
-
-                    b.HasIndex("UserAnswerId");
 
                     b.ToTable("questions");
                 });
@@ -141,7 +123,12 @@ namespace AppProjetFilRouge.Data.Migrations
                         .HasColumnType("varchar(5000)")
                         .HasColumnName("text");
 
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("int");
+
                     b.HasKey("QuestionAnswerId");
+
+                    b.HasIndex("QuestionId");
 
                     b.ToTable("questionAnswers");
                 });
@@ -229,6 +216,25 @@ namespace AppProjetFilRouge.Data.Migrations
                     b.HasKey("TechnologyId");
 
                     b.ToTable("technologies");
+                });
+
+            modelBuilder.Entity("AppProjetFilRouge.Data.Entities.UserAnswer", b =>
+                {
+                    b.Property<int>("UserAnswerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("userAnswer_id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserAnswerId"));
+
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserAnswerId");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("userAnswer");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -441,21 +447,6 @@ namespace AppProjetFilRouge.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("QuestionAnswerUserAnswer", b =>
-                {
-                    b.Property<int>("QuestionAnswersQuestionAnswerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserAnswersUserAnswerId")
-                        .HasColumnType("int");
-
-                    b.HasKey("QuestionAnswersQuestionAnswerId", "UserAnswersUserAnswerId");
-
-                    b.HasIndex("UserAnswersUserAnswerId");
-
-                    b.ToTable("QuestionAnswerUserAnswer");
-                });
-
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -483,15 +474,9 @@ namespace AppProjetFilRouge.Data.Migrations
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Question", b =>
                 {
-                    b.HasOne("AppProjetFilRouge.Data.Entities.Level", "Levels")
+                    b.HasOne("AppProjetFilRouge.Data.Entities.Level", "Level")
                         .WithMany("Questions")
                         .HasForeignKey("LevelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AppProjetFilRouge.Data.Entities.QuestionAnswer", "QuestionAnswer")
-                        .WithMany("Questions")
-                        .HasForeignKey("QuestionAnswerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -513,23 +498,24 @@ namespace AppProjetFilRouge.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AppProjetFilRouge.Data.Entities.UserAnswer", "UserAnswer")
-                        .WithMany("Questions")
-                        .HasForeignKey("UserAnswerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Levels");
-
-                    b.Navigation("QuestionAnswer");
+                    b.Navigation("Level");
 
                     b.Navigation("QuestionType");
 
                     b.Navigation("Quiz");
 
                     b.Navigation("Technology");
+                });
 
-                    b.Navigation("UserAnswer");
+            modelBuilder.Entity("AppProjetFilRouge.Data.Entities.QuestionAnswer", b =>
+                {
+                    b.HasOne("AppProjetFilRouge.Data.Entities.Question", "Question")
+                        .WithMany("QuestionAnswers")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Question");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Quiz", b =>
@@ -549,6 +535,17 @@ namespace AppProjetFilRouge.Data.Migrations
                     b.Navigation("Level");
 
                     b.Navigation("Technology");
+                });
+
+            modelBuilder.Entity("AppProjetFilRouge.Data.Entities.UserAnswer", b =>
+                {
+                    b.HasOne("AppProjetFilRouge.Data.Entities.Question", "Question")
+                        .WithMany()
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Question");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -602,26 +599,6 @@ namespace AppProjetFilRouge.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("QuestionAnswerUserAnswer", b =>
-                {
-                    b.HasOne("AppProjetFilRouge.Data.Entities.QuestionAnswer", null)
-                        .WithMany()
-                        .HasForeignKey("QuestionAnswersQuestionAnswerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AppProjetFilRouge.Data.Entities.UserAnswer", null)
-                        .WithMany()
-                        .HasForeignKey("UserAnswersUserAnswerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("AppProjetFilRouge.Data.Entities.UserAnswer", b =>
-                {
-                    b.Navigation("Questions");
-                });
-
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Level", b =>
                 {
                     b.Navigation("Questions");
@@ -629,9 +606,9 @@ namespace AppProjetFilRouge.Data.Migrations
                     b.Navigation("Quizzes");
                 });
 
-            modelBuilder.Entity("AppProjetFilRouge.Data.Entities.QuestionAnswer", b =>
+            modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Question", b =>
                 {
-                    b.Navigation("Questions");
+                    b.Navigation("QuestionAnswers");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.QuestionType", b =>
