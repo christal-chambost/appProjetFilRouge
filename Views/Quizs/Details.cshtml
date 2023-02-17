@@ -4,12 +4,13 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Détails du Quiz</h1>
 
-<div>
-    <h4>Quiz</h4>
-    <hr />
-    <dl class="row">
+<hr />
+
+<div class="pfr-gestionNavbar d-flex justify-content-center m-5 p-4">
+
+    <dl class="row d-flex justify-content-center">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -29,8 +30,18 @@
             @Html.DisplayFor(model => model.Level.Name)
         </dd>
     </dl>
+
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.QuizId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<hr />
+
+    <div class="pfr-gestionNavbar d-flex justify-content-center m-5 p-4">
+
+         <div>
+             <a asp-action="Edit" class="btn btn-primary mt-3 text-white">Edition</a>
+             <a asp-action="Index" class="btn btn-primary mt-3 text-white">Gestion du Quiz</a>
+         </div>
+
+    </div>
+
+<hr />

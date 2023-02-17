@@ -1,7 +1,7 @@
 ﻿@model List<QuizzViewModel>
 
 @{
-    ViewData["Title"] = "Gestion des quiz";
+    ViewData["Title"] = "Index";
 }
 
 <h1 class="display-4">Gestion des quiz</h1>
@@ -14,6 +14,7 @@
 
 
 <table class="table">
+
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -23,20 +24,24 @@
             <th scope="col">Actions</th>
         </tr>
     </thead>
+
     <tbody>
+
           @foreach (var item in Model)
-        {
-        <tr>
-            <th scope="row">@Html.DisplayFor(modelItem => item.QuizId)</th>
-            <td>@Html.DisplayFor(modelItem => item.Name)</td>
-            <td>@Html.DisplayFor(modelItem => item.Technology.Name)</td>
-            <td>@Html.DisplayFor(modelItem => item.Level.Name)</td>
-            <td>
-                    <a asp-action="Edit" asp-route-id="@item.QuizId" class="btn btn-sm btn-success text-white"><i class="bi bi-pencil-fill"></i></a>
-                    <a asp-action="Details" asp-route-id="@item.QuizId" class="btn btn-sm btn-warning text-white"><i class="bi bi-menu-button-fill"></i></a>
-                    <a asp-action="Delete" asp-route-id="@item.QuizId" class="btn btn-sm btn-danger text-white"><i class="bi bi-x-lg"></i></a>
-            </td>
-        </tr>
-        }
+           {
+                <tr>
+                    <th scope="row">@Html.DisplayFor(modelItem => item.QuizId)</th>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Technology.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Level.Name)</td>
+
+                    <td>
+                            <a asp-action="Edit" asp-route-id="@item.QuizId" class="btn btn-sm btn-success text-white"><i class="bi bi-pencil-fill"></i></a>
+                            <a asp-action="Details" asp-route-id="@item.QuizId" class="btn btn-sm btn-warning text-white"><i class="bi bi-menu-button-fill"></i></a>
+                            <a asp-action="Delete" asp-route-id="@item.QuizId" class="btn btn-sm btn-danger text-white"><i class="bi bi-x-lg"></i></a>
+                    </td>
+                </tr>
+           }
     </tbody>
+
 </table>

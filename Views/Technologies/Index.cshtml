@@ -4,31 +4,35 @@
     ViewData["Title"] = "Gestion technologie";
 }
 
-<h1>Index</h1>
+<h1 class="display-4">Gestion des technologies</h1>
 
-<p>
-    <a asp-action="Create">Ajout d'une technologie</a>
-</p>
+<div class="pfr-gestionNavbar d-flex justify-content-center m-5 p-4">
+    <a asp-action="Create" class="btn pfr-btn me-5 text-white">Ajout d'une technologie</a>
+    <a asp-area="" asp-controller="Quizs" asp-action="Index" class="btn pfr-btn me-5 text-white">Gestion des quiz</a>
+</div>
+
 <table class="table">
+
     <thead>
         <tr>
-            <th>
-                Nom de la technologie
-            </th>
-            <th></th>
+            <th scope="col">#</th>
+            <th scope="col">Nom de la technologie</th>
+            <th scope="col">Actions</th>
         </tr>
     </thead>
+
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.TechnologyId">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.TechnologyId">Delete</a>
-            </td>
-        </tr>
-}
+            @foreach (var item in Model)
+            {
+                  <tr>
+                      <th scope="row">@Html.DisplayFor(modelItem => item.TechnologyId)</th>
+                      <td>@Html.DisplayFor(modelItem => item.Name)</td>
+
+                      <td>
+                              <a asp-action="Edit" asp-route-id="@item.TechnologyId" class="btn btn-sm btn-success text-white"><i class="bi bi-pencil-fill"></i></a>
+                              <a asp-action="Delete" asp-route-id="@item.TechnologyId" class="btn btn-sm btn-danger text-white"><i class="bi bi-x-lg"></i></a>
+                      </td>
+                  </tr>
+            }
     </tbody>
 </table>
