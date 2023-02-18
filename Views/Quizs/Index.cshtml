@@ -21,6 +21,7 @@
             <th scope="col">Intitulé du quiz</th>
             <th scope="col">Technologie</th>
             <th scope="col">Niveau</th>
+            <th scope="col">Nombre de questions</th>
             <th scope="col">Actions</th>
         </tr>
     </thead>
@@ -34,7 +35,7 @@
                     <td>@Html.DisplayFor(modelItem => item.Name)</td>
                     <td>@Html.DisplayFor(modelItem => item.Technology.Name)</td>
                     <td>@Html.DisplayFor(modelItem => item.Level.Name)</td>
-
+                    <td>@Html.DisplayFor(modelItem => item.NbQuestions)</td>
                     <td>
                             <a asp-action="Edit" asp-route-id="@item.QuizId" class="btn btn-sm btn-success text-white"><i class="bi bi-pencil-fill"></i></a>
                             <a asp-action="Details" asp-route-id="@item.QuizId" class="btn btn-sm btn-warning text-white"><i class="bi bi-menu-button-fill"></i></a>

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AppProjetFilRouge.Data;
 using AppProjetFilRouge.Data.Entities;
 using AppProjetFilRouge.Models;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AppProjetFilRouge.Controllers.GestionQuizz
 {
@@ -24,7 +25,7 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
         public async Task<IActionResult> Index()
         {
             var questionAnswerList = await _context.QuestionAnswers.Include(q => q.Question).ToListAsync();
-          
+
             var listQuestionAnswerViewModel = new List<QuestionAnswerViewModel>();
 
             foreach (QuestionAnswer questionAnswer in questionAnswerList)
@@ -52,32 +53,52 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
             return View(questionAnswer);
         }
 
+        [HttpGet]
+        [Route("/Questions/{questionid?}/QuestionAnswers")]
         // GET: QuestionAnswers/Create
-        public IActionResult Create()
+        public IActionResult Create(int questionId)
         {
+            //créer une liste vide de questionanswerviewmodel
+            var questionAnswerCheckbox = new List<QuestionAnswerViewModel>();
+
+            for (int i = 0; i <= 3; i++)
+            {
+                questionAnswerCheckbox.Add(new QuestionAnswerViewModel
+                {
+                    QuestionId = questionId,
+                });
+            }
+
             ViewData["QuestionId"] = new SelectList(_context.Questions, "Questionid", "Name");
-            return View();
+            return View(questionAnswerCheckbox);
         }
 
         // POST: QuestionAnswers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Route("/Questions/{Questionid}/QuestionAnswers")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(QuestionAnswerViewModel questionAnswerViewModel)
+        public async Task<IActionResult> Create(int QuestionId, List<QuestionAnswerViewModel> questionAnswerViewModel)
         {
-            //var checkboxes = new List<QuestionAnswerViewModel>();
 
-            var questionAnswer = CastToQuestionAnswer(questionAnswerViewModel);
+            var listQuestionAnswer = new List<QuestionAnswer>();
 
-            if (ModelState.IsValid)
+            foreach (QuestionAnswerViewModel questionAnswerView in questionAnswerViewModel)
             {
-                _context.Add(questionAnswer);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var questionAnswer = CastToQuestionAnswer(questionAnswerView);
+
+                if (ModelState.IsValid)
+                {
+                    listQuestionAnswer.Add(questionAnswer);
+                    _context.Add(listQuestionAnswer[0]);
+                    await _context.SaveChangesAsync();
+                    listQuestionAnswer.Remove(questionAnswer);
+                    
+                }
+                
             }
-            ViewData["QuestionId"] = new SelectList(_context.Questions, "Questionid", "Name", questionAnswer.QuestionId);
-            return View(questionAnswer);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: QuestionAnswers/Edit/5

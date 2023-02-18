@@ -1,4 +1,4 @@
-﻿@model AppProjetFilRouge.Models.QuestionAnswerViewModel
+﻿@model List<QuestionAnswerViewModel>
 
 @{
     ViewData["Title"] = "Create";
@@ -6,26 +6,33 @@
 
 <h1>Create</h1>
 
-<h4>QuestionAnswer</h4>
+<h4>Question numéro: </h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="QuestionId" class="control-label"></label>
-                <select asp-for="QuestionId" class="form-control" asp-items="ViewBag.Questionid"></select>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsCorrect" /> @Html.DisplayNameFor(model => model.IsCorrect)
-                </label>
-            </div>
+            
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <div class="d-flex align-items-center">
+                    <div class="form-group form-check">
+                        <label class="form-check-label" asp-for="@Model[i].IsCorrect"></label>
+                        <input type="checkbox"  asp-for="@Model[i].IsCorrect" class="form-check-input" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model[i].Name" class="control-label">Choix @(i+1) :</label>
+                        <input asp-for="@Model[i].Name" class="form-control" />
+                        <span asp-validation-for="@Model[i].Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <input type="hidden" asp-for="@Model[i].QuestionId" />
+            }
+
+            @*            <div class="form-group">
+            <label asp-for="QuestionId" class="control-label"></label>
+            <select asp-for="QuestionId" class="form-control" asp-items="ViewBag.Questionid"></select>
+            </div>*@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

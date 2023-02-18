@@ -24,7 +24,7 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
         public async Task<IActionResult> Index()
         {
             var quizzList = await _context.Quizzes.Include(q => q.Level).Include(q => q.Technology).ToListAsync();
-        
+
             var listQuizzViewModel = new List<QuizzViewModel>();
 
             foreach (Quiz quizz in quizzList)
@@ -87,7 +87,7 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
         // GET: Quizs/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-     
+
             var quizzById = await _context.Quizzes.FindAsync(id);
             if (quizzById == null)
             {
@@ -175,6 +175,63 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
             return RedirectToAction(nameof(Index));
         }
 
+
+        // GET: Quizs/Create
+        public IActionResult GenerateQuiz()
+        {
+
+            ViewData["LevelId"] = new SelectList(_context.Levels, "LevelId", "Name");
+            ViewData["TechnologyId"] = new SelectList(_context.Technologies, "TechnologyId", "Name");
+            return View();
+        }
+
+        // POST: Quizs/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> GenerateQuiz(QuizzViewModel quizzViewModel)
+        {
+            //Je récupère le résultat du form et le transform en objet Quiz
+            var quizz = CastToQuiz(quizzViewModel);
+
+            if (ModelState.IsValid)
+            {
+                //J'ajoute le nouveau quiz dans la BDD
+                _context.Add(quizz);
+                await _context.SaveChangesAsync();
+
+                //Je récupère toutes les questions qui n'ont pas encore été attribué à un Quiz en m'assurant 
+                //de récupérer uniquement ceux avec la même techno et le même level. Et uniquement le nbQuestions indiqué dans le form.
+                var getAllQuestions = _context.Questions
+                .Where(q => q.QuizId == null && q.TechnologyId == quizzViewModel.TechnologyId && q.LevelId == quizzViewModel.LevelId)
+                .Take(quizzViewModel.NbQuestions)
+                .ToList();
+
+                //Je rajoute une condition au cas où il n'y a pas assez de questions dans la BDD
+                if (getAllQuestions.Count < quizzViewModel.NbQuestions)
+                {
+                    ModelState.AddModelError("NbQuestions", "Il n'y a pas suffisamment de questions dans la base de données pour créer ce quiz.");
+                    ViewData["LevelId"] = new SelectList(_context.Levels, "LevelId", "Name", quizzViewModel.LevelId);
+                    ViewData["TechnologyId"] = new SelectList(_context.Technologies, "TechnologyId", "Name", quizzViewModel.TechnologyId);
+                    return View("Create", quizzViewModel);
+                }
+
+                //Je lie les questions au quiz qui vient d'être créé
+                foreach (var question in getAllQuestions)
+                {
+                    question.QuizId = quizz.QuizId;
+                }
+
+                //Je sauvegarde les modifications
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["LevelId"] = new SelectList(_context.Levels, "LevelId", "Name", quizz.LevelId);
+            ViewData["TechnologyId"] = new SelectList(_context.Technologies, "TechnologyId", "Name", quizz.TechnologyId);
+            return View(quizz);
+        }
+
         private bool QuizExists(int id)
         {
             return (_context.Quizzes?.Any(e => e.QuizId == id)).GetValueOrDefault();
@@ -190,6 +247,8 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
                 TechnologyId = quizzViewModel.TechnologyId,
                 LevelId = quizzViewModel.LevelId,
                 Level = quizzViewModel.Level,
+                NbQuestions = quizzViewModel.NbQuestions,
+                DateCreation = DateTime.Now,
             };
             return quizz;
 
@@ -205,6 +264,8 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
                 TechnologyId = quiz.TechnologyId,
                 LevelId = quiz.LevelId,
                 Level = quiz.Level,
+                NbQuestions = quiz.NbQuestions,
+                DateCreation = DateTime.Now,
             };
             return quizzViewModel;
 

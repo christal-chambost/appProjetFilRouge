@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AppProjetFilRouge.Data;
 using AppProjetFilRouge.Data.Entities;
 using AppProjetFilRouge.Models;
+using Microsoft.Data.SqlClient;
 
 namespace AppProjetFilRouge.Controllers.GestionQuizz
 {
@@ -21,7 +22,7 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
         }
 
         // GET: Questions
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(/*string sortOrder, string currentFilter, string searchString, int? pageNumber*/)
         {
             var questionsList = await _context.Questions
                 .Include(q => q.Level)
@@ -32,10 +33,52 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
 
             var listQuestionsViewModel = new List<QuestionViewModel>();
 
-            foreach (Question question in questionsList)
+            foreach (Question _question in questionsList)
             {
-                listQuestionsViewModel.Add(CastToQuestionViewModel(question));
+                listQuestionsViewModel.Add(CastToQuestionViewModel(_question));
             }
+
+            /*//PAGINATION
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["LevelSortParm"] = String.IsNullOrEmpty(sortOrder) ? "level_desc" : "";
+            ViewData["TechnoSortParm"] = sortOrder == "Techno" ? "techno_desc" : "Techno";
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var question = from s in _context.Questions
+                            select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                question = question.Where(s => s.Level.Name.Contains(searchString)
+                                       || s.Technology.Name.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "level_desc":
+                    question = question.OrderByDescending(s => s.Level);
+                    break;
+                case "Techno":
+                    question = question.OrderBy(s => s.Technology);
+                    break;
+                case "techno_desc":
+                    question = question.OrderByDescending(s => s.Technology);
+                    break;
+                default:
+                    question = question.OrderBy(s => s.Level);
+                    break;
+            }
+            //    return View(await students.AsNoTracking().ToListAsync());
+            int pageSize = 3;
+            return View(await PaginatedList<Question>.CreateAsync(question, pageNumber ?? 1, pageSize));*/
 
             return View(listQuestionsViewModel);
         }
@@ -65,9 +108,14 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
         // GET: Questions/Create
         public IActionResult Create()
         {
+            var quizzes = _context.Quizzes.ToList();
+            quizzes.Insert(0, new Quiz { Name = "-- Sélectionner un Quiz --" });
+            ViewData["QuizId"] = new SelectList(quizzes.Select(q => new { QuizId = q.QuizId, q.Name }), "QuizId", "Name");
+
+
             ViewData["LevelId"] = new SelectList(_context.Levels, "LevelId", "Name");
             ViewData["QuestionTypeId"] = new SelectList(_context.QuestionTypes, "QuestionTypeId", "Name");
-            ViewData["QuizId"] = new SelectList(_context.Quizzes, "QuizId", "Name");
+            //ViewData["QuizId"] = new SelectList(_context.Quizzes, "QuizId", "Name", "--Select Process--");
             ViewData["TechnologyId"] = new SelectList(_context.Technologies, "TechnologyId", "Name");
             return View();
         }
@@ -84,13 +132,23 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
 
             if (ModelState.IsValid)
             {
+                // Set the QuizId property of the question object to null if "-- Select Quiz --" option is selected
+                if (question.QuizId == null || question.QuizId == 0)
+                {
+                    question.QuizId = null;
+                }
+
                 _context.Add(question);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Create", "QuestionAnswers", new { id = questionViewModel.QuestionTypeId });
+                return RedirectToAction("Create", "QuestionAnswers", new { questionId = question.Questionid });
             }
+
+            var quizzes = _context.Quizzes.ToList();
+            quizzes.Insert(0, new Quiz { Name = "-- Select Quiz --" });
+            ViewData["QuizId"] = new SelectList(quizzes.Select(q => new { QuizId = q.QuizId, q.Name }), "QuizId", "Name", questionViewModel.QuizId);
+
             ViewData["LevelId"] = new SelectList(_context.Levels, "LevelId", "Name", questionViewModel.LevelId);
             ViewData["QuestionTypeId"] = new SelectList(_context.QuestionTypes, "QuestionTypeId", "Name", questionViewModel.QuestionTypeId);
-            ViewData["QuizId"] = new SelectList(_context.Quizzes, "QuizId", "Name", questionViewModel.QuizId);
             ViewData["TechnologyId"] = new SelectList(_context.Technologies, "TechnologyId", "Name", questionViewModel.TechnologyId);
             return View(question);
         }
@@ -187,14 +245,14 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
             {
                 _context.Questions.Remove(questionById);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool QuestionExists(int id)
         {
-          return (_context.Questions?.Any(e => e.Questionid == id)).GetValueOrDefault();
+            return (_context.Questions?.Any(e => e.Questionid == id)).GetValueOrDefault();
         }
 
         public Question CastToQuestion(QuestionViewModel questionViewModel)
@@ -227,7 +285,7 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
                 LevelId = question.LevelId,
                 Level = question.Level,
                 QuestionTypeId = question.QuestionTypeId,
-                QuestionType= question.QuestionType,
+                QuestionType = question.QuestionType,
                 QuizId = question.QuizId,
                 Quiz = question.Quiz,
 

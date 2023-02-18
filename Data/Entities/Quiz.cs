@@ -23,5 +23,12 @@ namespace AppProjetFilRouge.Data.Entities
 		public int LevelId { get; set; }
 
 		public Level Level { get; set; } = null!;
+
+		public int NbQuestions { get; set; }
+
+        [Column(TypeName = "Date")]
+        public DateTime? DateCreation { get; set; }
+
+		//public ApplicationUser ApplicationUserId { get; set; }
 	}
 }

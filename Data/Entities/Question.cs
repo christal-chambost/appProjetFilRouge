@@ -30,9 +30,9 @@ namespace AppProjetFilRouge.Data.Entities
 		public Technology Technology { get; set; } = null!;
 
 
-        [ForeignKey(nameof(QuizId))]
-        public int QuizId { get; set; }
-		public Quiz Quiz { get; set; } = null!;
+		[ForeignKey(nameof(QuizId))]
+		public System.Nullable<int> QuizId { get; set; }
+		public Quiz? Quiz { get; set; } 
 
 
 		[ForeignKey(nameof(QuestionTypeId))]
