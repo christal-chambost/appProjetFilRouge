@@ -42,7 +42,7 @@ namespace AppProjetFilRouge.Data.Migrations
                 oldMaxLength: 75);
 
             migrationBuilder.AlterColumn<DateTime>(
-                name: "BirthDate",
+                name: "ABirthDate",
                 table: "AspNetUsers",
                 type: "datetime2",
                 nullable: true,
@@ -101,7 +101,7 @@ namespace AppProjetFilRouge.Data.Migrations
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<DateTime>(
-                name: "BirthDate",
+                name: "ABirthDate",
                 table: "AspNetUsers",
                 type: "datetime2",
                 nullable: false,

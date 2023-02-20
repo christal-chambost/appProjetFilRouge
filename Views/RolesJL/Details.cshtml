@@ -1,0 +1,46 @@
+﻿@model AppProjetFilRouge.Models.RoleViewModelJL
+
+@{
+    ViewData["Title"] = "Detail du role";
+}
+
+<h1>Detail du role</h1>
+
+<hr />
+
+<div class="pfr-gestionNavbar d-flex justify-content-center m-5 p-4">
+
+    <dl class="row d-flex justify-content-center">
+        <dt class = "col-sm-5">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-5">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-5">
+            @Html.DisplayNameFor(model => model.NormalizedName)
+        </dt>
+        <dd class = "col-sm-5">
+            @Html.DisplayFor(model => model.NormalizedName)
+        </dd>
+        <dt class = "col-sm-5">
+            @Html.DisplayNameFor(model => model.ConcurrencyStamp)
+        </dt>
+        <dd class = "col-sm-5">
+            @Html.DisplayFor(model => model.ConcurrencyStamp)
+        </dd>
+    </dl>
+</div>
+
+<hr />
+
+    <div class="pfr-gestionNavbar d-flex justify-content-center m-5 p-4">
+
+         <div>
+             <a asp-action="Edit" class="btn btn-primary mt-3 text-white">Edition</a>
+             <a asp-action="Index" class="btn btn-primary mt-3 text-white">Gestion des roles</a>
+         </div>
+
+    </div>
+
+<hr />

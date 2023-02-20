@@ -1,0 +1,51 @@
+﻿@model AppProjetFilRouge.Models.RoleViewModelJL
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Voulez-vous vraiment le supprimer ce role ?</h1>
+
+<hr />
+
+<div class="pfr-gestionNavbar d-flex justify-content-center m-5 p-4">
+
+    <dl class="row d-flex justify-content-center">
+        <dt class = "col-sm-5">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd class = "col-sm-5">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt class = "col-sm-5">
+            @Html.DisplayNameFor(model => model.NormalizedName)
+        </dt>
+
+        <dd class = "col-sm-5">
+            @Html.DisplayFor(model => model.NormalizedName)
+        </dd>
+
+        <dt class = "col-sm-5">
+            @Html.DisplayNameFor(model => model.ConcurrencyStamp)
+        </dt>
+
+        <dd class = "col-sm-5">
+            @Html.DisplayFor(model => model.ConcurrencyStamp)
+        </dd>
+    </dl>
+
+        <hr />
+  <div class="pfr-gestionNavbar d-flex justify-content-center m-5 p-4">
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Supprimer" class="btn btn-danger mt-3 text-white" />
+            <a asp-action="Index" class="btn btn-danger mt-3 text-white">Gestion des roles</a>
+        </form>
+
+    </div>
+    
+</div>
+<hr />

@@ -9,7 +9,6 @@
 <hr />
 
 <div>
-
     @foreach (var item in Model)
     {
         <h3>Quiz n°@Html.DisplayFor(modelItem => item.QuizId) | @Html.DisplayFor(modelItem => item.Technology.Name) (@Html.DisplayFor(modelItem => item.Level.Name))</h3>

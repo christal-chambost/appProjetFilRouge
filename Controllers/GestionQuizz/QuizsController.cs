@@ -12,6 +12,7 @@ using NuGet.Packaging.Signing;
 using System.ComponentModel;
 using System.Reflection;
 using System.Security.AccessControl;
+using X.PagedList;
 
 namespace AppProjetFilRouge.Controllers.GestionQuizz
 {
@@ -278,7 +279,6 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
                 DateCreation = DateTime.Now,
             };
             return quizzViewModel;
-
         }
     }
 }

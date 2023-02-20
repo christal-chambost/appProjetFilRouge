@@ -83,6 +83,44 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
             return View(listQuestionsViewModel);
         }
 
+
+// ---------------- Code en test pour faire une action de Trie ou Pagination -------------------------------
+
+/*        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        {
+            ViewData["LevelSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Level_desc" : "";
+            ViewData["TechnoSortParm"] = sortOrder == "Level" ? "_desc" : "Level";
+            ViewData["CurrentFilter"] = searchString;
+
+            var questions = from s in _context.Questions
+                           select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                questions = questions.Where(s => s.Level.Name.Contains(searchString)
+                                       || s.Technology.Name.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "Level_desc":
+                    questions = questions.OrderByDescending(s => s.Name);
+                    break;
+                case "Techno":
+                    questions = questions.OrderBy(s => s.Technology);
+                    break;
+                case "techno_desc":
+                    questions = questions.OrderByDescending(s => s.Technology);
+                    break;
+                default:
+                    questions = questions.OrderBy(s => s.Name);
+                    break;
+            }
+            return View(await questions.AsNoTracking().ToListAsync());
+        }
+*/
+// -------------------------------------------------------------------------------------------------------
+
         // GET: Questions/Details/5
         public async Task<IActionResult> Details(int? id)
         {

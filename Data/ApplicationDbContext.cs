@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using AppProjetFilRouge.Models;
 
 namespace AppProjetFilRouge.Data
 {
@@ -25,14 +26,21 @@ namespace AppProjetFilRouge.Data
 		public DbSet<QuizResult> QuizResults { get; set; }
 		public DbSet<UserAnswer> UserAnswers { get; set; }
 
-		protected override void OnModelCreating(ModelBuilder builder)
+        public DbSet<AppProjetFilRouge.Models.CandidatViewModelJL> CandidatViewModelJL { get; set; } = default!;
+
+        public DbSet<AppProjetFilRouge.Models.AgentViewModelJL> AgentViewModelJL { get; set; } = default!;
+
+		public DbSet<AppProjetFilRouge.Models.RoleViewModelJL> RoleViewModelJL { get; set; } = default!;
+
+
+        protected override void OnModelCreating(ModelBuilder builder)
 		{
 			base.OnModelCreating(builder);
 
 			builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
         }
     }
-
+		};
 
 
 	public class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<ApplicationUser>
@@ -41,8 +49,7 @@ namespace AppProjetFilRouge.Data
 		{
 			builder.Property(u => u.FirstName).HasMaxLength(75);
 			builder.Property(u => u.LastName).HasMaxLength(75);
-			builder.Property(u => u.BirthDate);
+			builder.Property(u => u.ABirthDate);
 			builder.Property(u => u.HandleBy).HasMaxLength(450);
 		}
 	}
-}
