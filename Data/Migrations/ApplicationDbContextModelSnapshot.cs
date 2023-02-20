@@ -39,7 +39,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasKey("CompanyId");
 
-                    b.ToTable("companies");
+                    b.ToTable("companies", (string)null);
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Level", b =>
@@ -58,7 +58,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasKey("LevelId");
 
-                    b.ToTable("levels");
+                    b.ToTable("levels", (string)null);
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Question", b =>
@@ -87,7 +87,7 @@ namespace AppProjetFilRouge.Data.Migrations
                     b.Property<int>("QuestionTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("QuizId")
+                    b.Property<int?>("QuizId")
                         .HasColumnType("int");
 
                     b.Property<int>("TechnologyId")
@@ -103,7 +103,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasIndex("TechnologyId");
 
-                    b.ToTable("questions");
+                    b.ToTable("questions", (string)null);
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.QuestionAnswer", b =>
@@ -130,7 +130,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("questionAnswers");
+                    b.ToTable("questionAnswers", (string)null);
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.QuestionType", b =>
@@ -149,7 +149,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasKey("QuestionTypeId");
 
-                    b.ToTable("questionTypes");
+                    b.ToTable("questionTypes", (string)null);
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Quiz", b =>
@@ -161,6 +161,9 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QuizId"));
 
+                    b.Property<DateTime?>("DateCreation")
+                        .HasColumnType("Date");
+
                     b.Property<int>("LevelId")
                         .HasColumnType("int");
 
@@ -168,6 +171,9 @@ namespace AppProjetFilRouge.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(500)")
                         .HasColumnName("name");
+
+                    b.Property<int>("NbQuestions")
+                        .HasColumnType("int");
 
                     b.Property<int>("TechnologyId")
                         .HasColumnType("int");
@@ -178,7 +184,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasIndex("TechnologyId");
 
-                    b.ToTable("quizzes");
+                    b.ToTable("quizzes", (string)null);
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.QuizResult", b =>
@@ -196,7 +202,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasKey("QuizResultId");
 
-                    b.ToTable("quizResult");
+                    b.ToTable("quizResult", (string)null);
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Technology", b =>
@@ -215,7 +221,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasKey("TechnologyId");
 
-                    b.ToTable("technologies");
+                    b.ToTable("technologies", (string)null);
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.UserAnswer", b =>
@@ -234,7 +240,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("userAnswer");
+                    b.ToTable("userAnswer", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -488,9 +494,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasOne("AppProjetFilRouge.Data.Entities.Quiz", "Quiz")
                         .WithMany()
-                        .HasForeignKey("QuizId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("QuizId");
 
                     b.HasOne("AppProjetFilRouge.Data.Entities.Technology", "Technology")
                         .WithMany("Questions")
