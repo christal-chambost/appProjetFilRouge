@@ -58,7 +58,12 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
         // GET: QuestionAnswers/Create
         public IActionResult Create(int questionId)
         {
+      
             var questionAnswerCheckbox = new List<QuestionAnswerViewModel>();
+
+            //Je veux récupérer le type de la question dont l'ID est égal au Questionid récupéré
+            var questionTypeById = _context.Questions.Where(q => q.Questionid == questionId).Select(q => q.QuestionTypeId);
+            //ViewData["QuestionTypeId"] = questionTypeById;
 
             for (int i = 0; i <= 3; i++)
             {
@@ -68,7 +73,9 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
                 });
             }
 
+            ViewData["QuestionTypeId"] = _context.Questions.Where(q => q.Questionid == questionId).Select(q => q.QuestionTypeId);
             ViewData["QuestionId"] = new SelectList(_context.Questions, "Questionid", "Name");
+           
             return View(questionAnswerCheckbox);
         }
 
@@ -78,7 +85,7 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
         [HttpPost]
         [Route("/Questions/{Questionid}/QuestionAnswers")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int QuestionId, List<QuestionAnswerViewModel> questionAnswerViewModel)
+        public async Task<IActionResult> Create(int questionId, List<QuestionAnswerViewModel> questionAnswerViewModel)
         {
 
             var listQuestionAnswer = new List<QuestionAnswer>();
@@ -93,7 +100,6 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
                     _context.Add(listQuestionAnswer[0]);
                     await _context.SaveChangesAsync();
                     listQuestionAnswer.Remove(questionAnswer);
-                    
                 }
                 
             }

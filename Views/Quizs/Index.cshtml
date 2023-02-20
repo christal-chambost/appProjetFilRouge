@@ -61,21 +61,6 @@
                 </tr>
  
            }
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td> @Html.DisplayFor(modelItem => item.QuizId)</td>
-                <td> @Html.DisplayFor(modelItem => item.Name) </td>
-                <td> @Html.DisplayFor(modelItem => item.LevelId)</td>
-
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.QuizId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.QuizId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.QuizId">Delete</a>
-                </td>
-            </tr>
-        }
       
 
     </tbody>

@@ -177,7 +177,7 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
 
                 _context.Add(questions);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Create", "QuestionAnswers", new { questionId = questions.Questionid, questionTypeId = questions.QuestionTypeId });
+                return RedirectToAction("Create", "QuestionAnswers", new { questionId = questions.Questionid });
             }
 
             var quizzes = _context.Quizzes.ToList();

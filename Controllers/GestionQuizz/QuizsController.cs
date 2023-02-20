@@ -185,7 +185,7 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
         }
 
 
-        // GET: Quizs/Create
+        // GET: Quizs/GenerateQuiz
         public IActionResult GenerateQuiz()
         {
 
@@ -194,7 +194,7 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
             return View();
         }
 
-        // POST: Quizs/Create
+        // POST: Quizs/GenerateQuiz
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
