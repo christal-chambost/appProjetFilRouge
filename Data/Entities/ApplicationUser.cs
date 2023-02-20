@@ -8,7 +8,7 @@ namespace AppProjetFilRouge.Data.Entities
 
 		public string LastName { get; set; } = null!;
 
-		public DateTime BirthDate { get; set; }
+		public DateTime ABirthDate { get; set; }
 
 		public string HandleBy { get; set; } = null!;
 

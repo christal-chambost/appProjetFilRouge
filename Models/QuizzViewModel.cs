@@ -33,6 +33,15 @@ namespace AppProjetFilRouge.Models
         [Column("name", TypeName = "varchar(500)")]
         public int LevelId { get; set; }
 
-        public Level? Level { get; set; } 
+        public Level? Level { get; set; }
+
+        [Required]
+        [DisplayName("Nombre de questions")]
+        public int NbQuestions { get; set; }
+
+        [Column(TypeName = "Date")]
+        public DateTime? DateCreation { get; set; }
+
+        public ICollection<Question>? Questions { get; set; }
     }
 }

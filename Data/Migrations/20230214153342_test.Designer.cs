@@ -239,7 +239,7 @@ namespace AppProjetFilRouge.Data.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<DateTime>("ABirthDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")

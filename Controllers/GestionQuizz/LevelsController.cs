@@ -43,8 +43,8 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
                 return NotFound();
             }
 
-            var level = await _context.Levels
-                .FirstOrDefaultAsync(m => m.LevelId == id);
+            var level = await _context.Levels.FirstOrDefaultAsync(m => m.LevelId == id);
+
             if (level == null)
             {
                 return NotFound();

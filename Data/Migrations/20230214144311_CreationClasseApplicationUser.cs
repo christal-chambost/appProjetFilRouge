@@ -12,7 +12,7 @@ namespace AppProjetFilRouge.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<DateTime>(
-                name: "BirthDate",
+                name: "ABirthDate",
                 table: "AspNetUsers",
                 type: "datetime2",
                 nullable: false,
@@ -47,7 +47,7 @@ namespace AppProjetFilRouge.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "BirthDate",
+                name: "ABirthDate",
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(

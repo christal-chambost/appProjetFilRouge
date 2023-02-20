@@ -30,9 +30,9 @@ namespace AppProjetFilRouge.Data.Entities
 		public Technology Technology { get; set; } = null!;
 
 
-        [ForeignKey(nameof(QuizId))]
-        public int QuizId { get; set; }
-		public Quiz Quiz { get; set; } = null!;
+		[ForeignKey(nameof(QuizId))]
+		public int? QuizId { get; set; }
+		public Quiz? Quiz { get; set; } 
 
 
 		[ForeignKey(nameof(QuestionTypeId))]
@@ -41,7 +41,7 @@ namespace AppProjetFilRouge.Data.Entities
 
 		public string? CommentUser { get; set; } 
 
-        public string? Correction { get; set; } 
+        public string? Correction { get; set; }
 
         public virtual ICollection<QuestionAnswer> QuestionAnswers { get; set; } = null!;
 

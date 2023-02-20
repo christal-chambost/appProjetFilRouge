@@ -1,4 +1,4 @@
-﻿@model AppProjetFilRouge.Data.Entities.Quiz
+﻿@model List<QuizzViewModel>
 
 @{
     ViewData["Title"] = "Details";
@@ -8,40 +8,47 @@
 
 <hr />
 
-<div class="pfr-gestionNavbar d-flex justify-content-center m-5 p-4">
+<div>
+    @foreach (var item in Model)
+    {
+        <h3>Quiz n°@Html.DisplayFor(modelItem => item.QuizId) | @Html.DisplayFor(modelItem => item.Technology.Name) (@Html.DisplayFor(modelItem => item.Level.Name))</h3>
+        <h4>Intitulé du quiz : @Html.DisplayFor(modelItem => item.Name)</h4>
 
-    <dl class="row d-flex justify-content-center">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Technology)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Technology.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Level)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Level.Name)
-        </dd>
-    </dl>
+        <div class="d-flex flex-wrap justify-content-center">
+            @foreach (var question in item.Questions)
+            {
+
+                <div class="card m-2" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            @Html.DisplayFor(modelItem => question.Name) <a asp-area="" asp-controller="Questions" asp-action="Edit" asp-route-id="@question.Questionid"><i class="bi bi-pencil-fill" style="font-size: 15px;"></i></a>
+</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => question.QuestionType.Name)</h6>
+                        <p class="card-text">
+                            <ul>
+                                @foreach (var questionAnswer in question.QuestionAnswers)
+                                {
+                                    <li>@Html.DisplayFor(modelItem => questionAnswer.Name) <a asp-area="" asp-controller="QuestionAnswers" asp-action="Edit" asp-route-id="@questionAnswer.QuestionAnswerId"><i class="bi bi-pencil-fill" style="font-size: 10px;"></i></a></li>
+                                }
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+
+    }
 
 </div>
 
 <hr />
 
-    <div class="pfr-gestionNavbar d-flex justify-content-center m-5 p-4">
+<div class="d-flex justify-content-center m-5 p-4">
 
-         <div>
-             <a asp-action="Edit" class="btn btn-primary mt-3 text-white">Edition</a>
-             <a asp-action="Index" class="btn btn-primary mt-3 text-white">Gestion du Quiz</a>
-         </div>
-
+    <div>
+        <a asp-action="Index" class="btn btn-primary mt-3 text-white">Retour</a>
     </div>
+
+</div>
 
 <hr />

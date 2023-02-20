@@ -1,10 +1,10 @@
 ﻿@model AppProjetFilRouge.Models.QuizzViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Ajouter un Quiz";
 }
 
-<h1>Création d'un Quiz</h1>
+<h1>Ajouter un Quiz</h1>
 
 <hr />
 
@@ -29,11 +29,17 @@
                 <label asp-for="LevelId" class="control-label fw-bold"></label>
                 <select asp-for="LevelId" class ="form-control" asp-items="ViewBag.LevelId"></select>
             </div>
+            <div class="form-group my-3">
+                <label asp-for="NbQuestions" class="control-label fw-bold"></label>
+                <input asp-for="NbQuestions" type="number" min="10" max="30" step="10" class="form-control" />
+                <span asp-validation-for="NbQuestions" class="text-danger"></span>
+            </div>
 
             <hr />
 
             <div class="form-group my-3">
                 <input type="submit" value="Ajouter" class="btn btn-primary mt-3 text-white"/>
+                <button type="submit" formaction="@Url.Action("GenerateQuiz")" class="btn btn-primary mt-3 text-white">Generate Quiz</button>
                 <a asp-action="Index" class="btn btn-primary mt-3 text-white">Gestion du Quiz</a>
             </div>
 
