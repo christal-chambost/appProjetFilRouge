@@ -1,0 +1,45 @@
+﻿@model AppProjetFilRouge.Models.PassageViewModel
+
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Passage.cshtml";
+}
+
+<div class="test glossy">
+	<div class="">
+		<h4 class="text-white">Quizz @Model.QuizzName</h4>
+
+	</div>
+	<div class="">
+		<br />
+		<h3 class="text-white">Questions @Model.NumeroCourant / @Model.TotalQuestions</h3>
+		<div class="glossy">
+			<div class="col-md-4">
+				<form asp-action="Index" asp-route-id="@Model.QuizzId" asp-route-questionId="@Model.QuestionId">
+					@foreach (var reponse in Model.Reponses)
+					{
+						<div class="form-group">
+							<input type="checkbox" class="text-white" name="@reponse.Id" checked="@reponse.IsCheched">
+							<label for="@reponse.Id" class="control-label text-white">@reponse.Content</label>
+						</div>
+					}
+					<div class="form-group">
+						<input type="submit" value="Suivant" class="btn btn-primary" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+@*<section class="text-white v-ct">
+    <div class="align-items-center glossy">
+        <span class="text-white">1</span>
+    </div>
+</section>*@
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

@@ -32,4 +32,8 @@
     <Folder Include="Controllers\GestionActeurs\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Views\Passage\Index.cshtml" />
+  </ItemGroup>
+
 </Project>

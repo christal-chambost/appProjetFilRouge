@@ -1,0 +1,85 @@
+﻿body {
+    /*background-color: #EEF0FF;*/
+    /*background-color: white;*/
+    /*background-color: #293158;*/
+    /*background-color: #4E6BFD;*/ /* bleu semi */
+    /*    background: rgb(2,0,36);
+    background: linear-gradient(15deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);*/
+    height: 100%;
+    width: 100vw;
+    background-image: url("../../img/test.png");
+    /*    background-size: contain;*/
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+
+a:visited {
+    text-decoration: none;
+    color: rgba(231,145,73);
+}
+
+
+a:hover {
+    text-decoration: none;
+}
+
+
+a:active {
+    text-decoration: none;
+}
+
+.glossy {
+    /*    background: #516eff2f;
+    border-radius: 10px;*/
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+.blck {
+    height: 400px;
+    width: 1300px;
+}
+
+.txt-bc {
+    /*background-color: #9ABEF8;*/ /*bleu clair*/
+    color: #9ABEF8;
+}
+
+.btn-cl-bs {
+    background-color: #293158;
+}
+
+.v-center {
+    min-height: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.v-ct {
+    min-height: 100%;
+    min-height: 100vh;
+    align-items: center;
+}
+
+
+.test {
+    margin: 15vh auto;
+    width: 50%;
+    height: 100%;
+    padding: 4vh 4vw;
+}
+
+.pad {
+    padding: 4vh 4vw;
+}
