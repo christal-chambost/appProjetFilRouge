@@ -30,8 +30,8 @@ namespace AppProjetFilRouge.Data
 			base.OnModelCreating(builder);
 
 			builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
-		}
-	}
+        }
+    }
 
 
 
@@ -45,5 +45,4 @@ namespace AppProjetFilRouge.Data
 			builder.Property(u => u.HandleBy).HasMaxLength(450);
 		}
 	}
-
 }

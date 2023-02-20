@@ -31,7 +31,7 @@ namespace AppProjetFilRouge.Data.Entities
 
 
 		[ForeignKey(nameof(QuizId))]
-		public System.Nullable<int> QuizId { get; set; }
+		public int? QuizId { get; set; }
 		public Quiz? Quiz { get; set; } 
 
 
@@ -41,7 +41,7 @@ namespace AppProjetFilRouge.Data.Entities
 
 		public string? CommentUser { get; set; } 
 
-        public string? Correction { get; set; } 
+        public string? Correction { get; set; }
 
         public virtual ICollection<QuestionAnswer> QuestionAnswers { get; set; } = null!;
 

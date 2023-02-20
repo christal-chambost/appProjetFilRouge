@@ -41,5 +41,7 @@ namespace AppProjetFilRouge.Models
 
         [Column(TypeName = "Date")]
         public DateTime? DateCreation { get; set; }
+
+        public ICollection<Question>? Questions { get; set; }
     }
 }

@@ -33,9 +33,9 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
 
             var listQuestionsViewModel = new List<QuestionViewModel>();
 
-            foreach (Question _question in questionsList)
+            foreach (Question question in questionsList)
             {
-                listQuestionsViewModel.Add(CastToQuestionViewModel(_question));
+                listQuestionsViewModel.Add(CastToQuestionViewModel(question));
             }
 
             /*//PAGINATION
@@ -115,7 +115,6 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
 
             ViewData["LevelId"] = new SelectList(_context.Levels, "LevelId", "Name");
             ViewData["QuestionTypeId"] = new SelectList(_context.QuestionTypes, "QuestionTypeId", "Name");
-            //ViewData["QuizId"] = new SelectList(_context.Quizzes, "QuizId", "Name", "--Select Process--");
             ViewData["TechnologyId"] = new SelectList(_context.Technologies, "TechnologyId", "Name");
             return View();
         }
@@ -128,19 +127,19 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
         public async Task<IActionResult> Create(QuestionViewModel questionViewModel)
         {
 
-            var question = CastToQuestion(questionViewModel);
+            var questions = CastToQuestion(questionViewModel);
 
             if (ModelState.IsValid)
             {
-                // Set the QuizId property of the question object to null if "-- Select Quiz --" option is selected
-                if (question.QuizId == null || question.QuizId == 0)
+
+                if (questions.QuizId == null || questions.QuizId == 0)
                 {
-                    question.QuizId = null;
+                    questions.QuizId = null;
                 }
 
-                _context.Add(question);
+                _context.Add(questions);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Create", "QuestionAnswers", new { questionId = question.Questionid });
+                return RedirectToAction("Create", "QuestionAnswers", new { questionId = questions.Questionid, questionTypeId = questions.QuestionTypeId });
             }
 
             var quizzes = _context.Quizzes.ToList();
@@ -150,7 +149,7 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
             ViewData["LevelId"] = new SelectList(_context.Levels, "LevelId", "Name", questionViewModel.LevelId);
             ViewData["QuestionTypeId"] = new SelectList(_context.QuestionTypes, "QuestionTypeId", "Name", questionViewModel.QuestionTypeId);
             ViewData["TechnologyId"] = new SelectList(_context.Technologies, "TechnologyId", "Name", questionViewModel.TechnologyId);
-            return View(question);
+            return View(questionViewModel);
         }
 
         // GET: Questions/Edit/5
@@ -176,7 +175,7 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, QuestionViewModel questionViewModel)
         {
-
+            
             var questionById = CastToQuestion(questionViewModel);
 
             if (id != questionViewModel.Questionid)
@@ -269,6 +268,7 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
                 QuestionType = questionViewModel.QuestionType,
                 QuizId = questionViewModel.QuizId,
                 Quiz = questionViewModel.Quiz,
+                QuestionAnswers = questionViewModel.QuestionAnswers,
             };
             return question;
 
@@ -288,6 +288,7 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
                 QuestionType = question.QuestionType,
                 QuizId = question.QuizId,
                 Quiz = question.Quiz,
+                QuestionAnswers = question.QuestionAnswers,
 
             };
             return questionViewModel;

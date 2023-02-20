@@ -29,6 +29,7 @@ namespace AppProjetFilRouge.Data.Entities
         [Column(TypeName = "Date")]
         public DateTime? DateCreation { get; set; }
 
-		//public ApplicationUser ApplicationUserId { get; set; }
-	}
+        public virtual ICollection<Question>? Questions { get; set; }
+        //public ApplicationUser ApplicationUserId { get; set; }
+    }
 }

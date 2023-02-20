@@ -31,7 +31,7 @@ namespace AppProjetFilRouge.Models
 
 
         [ForeignKey(nameof(QuizId))]
-        public System.Nullable<int> QuizId { get; set; }
+        public int? QuizId { get; set; }
         public Quiz? Quiz { get; set; }
 
 
@@ -43,7 +43,10 @@ namespace AppProjetFilRouge.Models
 
         public string? Correction { get; set; }
 
-        public string? sortOrder { get; set; }
-        public int? pageNumber { get; set; }
+        public ICollection<QuestionAnswer>? QuestionAnswers { get; set; } = null!;
+
+
+        //public string? sortOrder { get; set; }
+        //public int? pageNumber { get; set; }
     }
 }

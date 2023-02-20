@@ -54,11 +54,10 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
         }
 
         [HttpGet]
-        [Route("/Questions/{questionid?}/QuestionAnswers")]
+        [Route("/Questions/{questionid}/QuestionAnswers")]
         // GET: QuestionAnswers/Create
         public IActionResult Create(int questionId)
         {
-            //créer une liste vide de questionanswerviewmodel
             var questionAnswerCheckbox = new List<QuestionAnswerViewModel>();
 
             for (int i = 0; i <= 3; i++)

@@ -8,6 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using AppProjetFilRouge.Data;
 using AppProjetFilRouge.Data.Entities;
 using AppProjetFilRouge.Models;
+using NuGet.Packaging.Signing;
+using System.ComponentModel;
+using System.Reflection;
+using System.Security.AccessControl;
 
 namespace AppProjetFilRouge.Controllers.GestionQuizz
 {
@@ -36,23 +40,27 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
         }
 
         // GET: Quizs/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null || _context.Quizzes == null)
-            {
-                return NotFound();
-            }
 
-            var quiz = await _context.Quizzes
+            var quizById = await _context.Quizzes
                 .Include(q => q.Level)
                 .Include(q => q.Technology)
-                .FirstOrDefaultAsync(m => m.QuizId == id);
-            if (quiz == null)
+                .Include(q => q.Questions)
+                .ThenInclude(q => q.QuestionAnswers)
+            .FirstOrDefaultAsync(q => q.QuizId == id!);
+
+            if (quizById == null)
             {
                 return NotFound();
             }
 
-            return View(quiz);
+            var quizByIdList = new List<QuizzViewModel>
+            {
+                CastToQuizzViewModel(quizById)
+            };
+
+            return View(quizByIdList);
         }
 
         // GET: Quizs/Create
@@ -247,6 +255,7 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
                 TechnologyId = quizzViewModel.TechnologyId,
                 LevelId = quizzViewModel.LevelId,
                 Level = quizzViewModel.Level,
+                Questions = quizzViewModel.Questions,
                 NbQuestions = quizzViewModel.NbQuestions,
                 DateCreation = DateTime.Now,
             };
@@ -264,6 +273,7 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
                 TechnologyId = quiz.TechnologyId,
                 LevelId = quiz.LevelId,
                 Level = quiz.Level,
+                Questions = quiz.Questions,
                 NbQuestions = quiz.NbQuestions,
                 DateCreation = DateTime.Now,
             };
