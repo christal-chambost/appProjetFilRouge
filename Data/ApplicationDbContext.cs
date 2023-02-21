@@ -39,6 +39,15 @@ namespace AppProjetFilRouge.Data
 
 			builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
         }
+
+
+        public DbSet<AppProjetFilRouge.Models.AgentViewModel> AgentViewModel { get; set; } = default!;
+
+
+        public DbSet<AppProjetFilRouge.Models.CandidatViewModel> CandidatViewModel { get; set; } = default!;
+
+
+        public DbSet<AppProjetFilRouge.Models.RoleViewModel> RoleViewModel { get; set; } = default!;
     }
 		};
 

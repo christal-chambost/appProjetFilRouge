@@ -39,7 +39,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasKey("CompanyId");
 
-                    b.ToTable("companies", (string)null);
+                    b.ToTable("companies");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Level", b =>
@@ -58,7 +58,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasKey("LevelId");
 
-                    b.ToTable("levels", (string)null);
+                    b.ToTable("levels");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Question", b =>
@@ -103,7 +103,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasIndex("TechnologyId");
 
-                    b.ToTable("questions", (string)null);
+                    b.ToTable("questions");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.QuestionAnswer", b =>
@@ -130,7 +130,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("questionAnswers", (string)null);
+                    b.ToTable("questionAnswers");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.QuestionType", b =>
@@ -149,7 +149,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasKey("QuestionTypeId");
 
-                    b.ToTable("questionTypes", (string)null);
+                    b.ToTable("questionTypes");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Quiz", b =>
@@ -184,7 +184,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasIndex("TechnologyId");
 
-                    b.ToTable("quizzes", (string)null);
+                    b.ToTable("quizzes");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.QuizResult", b =>
@@ -202,7 +202,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasKey("QuizResultId");
 
-                    b.ToTable("quizResult", (string)null);
+                    b.ToTable("quizResult");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Technology", b =>
@@ -221,7 +221,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasKey("TechnologyId");
 
-                    b.ToTable("technologies", (string)null);
+                    b.ToTable("technologies");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.UserAnswer", b =>
@@ -240,7 +240,41 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("userAnswer", (string)null);
+                    b.ToTable("userAnswer");
+                });
+
+            modelBuilder.Entity("AppProjetFilRouge.Models.AgentViewModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Agent_id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AgentViewModel");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Models.AgentViewModelJL", b =>
@@ -275,6 +309,44 @@ namespace AppProjetFilRouge.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AgentViewModelJL");
+                });
+
+            modelBuilder.Entity("AppProjetFilRouge.Models.CandidatViewModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Candidat_id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("ABirthDate")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CandidatViewModel");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Models.CandidatViewModelJL", b =>
@@ -365,6 +437,30 @@ namespace AppProjetFilRouge.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CandidatViewModelJL");
+                });
+
+            modelBuilder.Entity("AppProjetFilRouge.Models.RoleViewModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ConcurrencyStamp")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RoleViewModel");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Models.RoleViewModelJL", b =>
@@ -641,7 +737,7 @@ namespace AppProjetFilRouge.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("AppProjetFilRouge.Data.Entities.Quiz", "Quiz")
-                        .WithMany()
+                        .WithMany("Questions")
                         .HasForeignKey("QuizId");
 
                     b.HasOne("AppProjetFilRouge.Data.Entities.Technology", "Technology")
@@ -764,6 +860,11 @@ namespace AppProjetFilRouge.Data.Migrations
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.QuestionType", b =>
+                {
+                    b.Navigation("Questions");
+                });
+
+            modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Quiz", b =>
                 {
                     b.Navigation("Questions");
                 });

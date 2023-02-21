@@ -1,0 +1,39 @@
+﻿@model AppProjetFilRouge.Models.CandidatViewModel
+
+@{
+    ViewData["Title"] = "Delete Candidat";
+}
+
+<h1>Voulez-vous vraiment le supprimer le Candidat ?</h1>
+
+<hr />
+
+    <div class="pfr-gestionNavbar d-flex justify-content-center m-5 p-4">
+     <dl class="row d-flex justify-content-center">
+
+        <dt class = "col-sm-2">@Html.DisplayNameFor(model => model.UserName)</dt>
+        <dd class = "col-sm-10">@Html.DisplayFor(model => model.UserName)</dd>
+        <dt class = "col-sm-2">@Html.DisplayNameFor(model => model.Email)</dt>
+        <dd class = "col-sm-10">@Html.DisplayFor(model => model.Email)</dd>
+        <dt class = "col-sm-2">@Html.DisplayNameFor(model => model.PhoneNumber)</dt>
+        <dd class = "col-sm-10">@Html.DisplayFor(model => model.PhoneNumber)</dd>
+        <dt class = "col-sm-2">@Html.DisplayNameFor(model => model.ABirthDate)</dt>
+        <dd class = "col-sm-10">@Html.DisplayFor(model => model.ABirthDate)</dd>
+        <dt class = "col-sm-2">@Html.DisplayNameFor(model => model.FirstName)</dt>
+        <dd class = "col-sm-10">@Html.DisplayFor(model => model.FirstName)</dd>
+        <dt class = "col-sm-2">@Html.DisplayNameFor(model => model.LastName)</dt>
+        <dd class = "col-sm-10">@Html.DisplayFor(model => model.LastName)</dd>
+    </dl>
+
+    </div>
+
+    <div class="pfr-gestionNavbar d-flex justify-content-center m-5 p-4">
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Supprimer" class="btn btn-danger mt-3 text-white" />
+            <a asp-action="Index" class="btn btn-danger mt-3 text-white">Gestion des Candidats</a>
+        </form>
+
+    </div>
+
