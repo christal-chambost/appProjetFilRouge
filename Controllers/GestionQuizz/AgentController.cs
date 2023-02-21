@@ -6,92 +6,91 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AppProjetFilRouge.Data;
-using AppProjetFilRouge.Data.Entities;
 using AppProjetFilRouge.Models;
 
-namespace AppProjetFilRouge.Controllers
+namespace AppProjetFilRouge.Controllers.GestionQuizz
 {
-    public class RolesJLController : Controller
+    public class AgentController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public RolesJLController(ApplicationDbContext context)
+        public AgentController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: RolesJL
+        // GET: Agent
         public async Task<IActionResult> Index()
         {
-              return _context.RoleViewModelJL != null ? 
-                          View(await _context.RoleViewModelJL.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.RoleViewModelJL'  is null.");
+            return _context.AgentViewModel != null ?
+                        View(await _context.AgentViewModel.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.AgentViewModel'  is null.");
         }
 
-        // GET: RolesJL/Details/5
+        // GET: Agent/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.RoleViewModelJL == null)
+            if (id == null || _context.AgentViewModel == null)
             {
                 return NotFound();
             }
 
-            var roleViewModelJL = await _context.RoleViewModelJL
+            var agentViewModel = await _context.AgentViewModel
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (roleViewModelJL == null)
+            if (agentViewModel == null)
             {
                 return NotFound();
             }
 
-            return View(roleViewModelJL);
+            return View(agentViewModel);
         }
 
-        // GET: RolesJL/Create
+        // GET: Agent/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: RolesJL/Create
+        // POST: Agent/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,NormalizedName,ConcurrencyStamp")] RoleViewModelJL roleViewModelJL)
+        public async Task<IActionResult> Create([Bind("Id,UserName,Email,PhoneNumber,FirstName,LastName")] AgentViewModel agentViewModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(roleViewModelJL);
+                _context.Add(agentViewModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(roleViewModelJL);
+            return View(agentViewModel);
         }
 
-        // GET: RolesJL/Edit/5
+        // GET: Agent/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.RoleViewModelJL == null)
+            if (id == null || _context.AgentViewModel == null)
             {
                 return NotFound();
             }
 
-            var roleViewModelJL = await _context.RoleViewModelJL.FindAsync(id);
-            if (roleViewModelJL == null)
+            var agentViewModel = await _context.AgentViewModel.FindAsync(id);
+            if (agentViewModel == null)
             {
                 return NotFound();
             }
-            return View(roleViewModelJL);
+            return View(agentViewModel);
         }
 
-        // POST: RolesJL/Edit/5
+        // POST: Agent/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,NormalizedName,ConcurrencyStamp")] RoleViewModelJL roleViewModelJL)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserName,Email,PhoneNumber,FirstName,LastName")] AgentViewModel agentViewModel)
         {
-            if (id != roleViewModelJL.Id)
+            if (id != agentViewModel.Id)
             {
                 return NotFound();
             }
@@ -100,12 +99,12 @@ namespace AppProjetFilRouge.Controllers
             {
                 try
                 {
-                    _context.Update(roleViewModelJL);
+                    _context.Update(agentViewModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RoleViewModelJLExists(roleViewModelJL.Id))
+                    if (!AgentViewModelExists(agentViewModel.Id))
                     {
                         return NotFound();
                     }
@@ -116,49 +115,49 @@ namespace AppProjetFilRouge.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(roleViewModelJL);
+            return View(agentViewModel);
         }
 
-        // GET: RolesJL/Delete/5
+        // GET: Agent/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.RoleViewModelJL == null)
+            if (id == null || _context.AgentViewModel == null)
             {
                 return NotFound();
             }
 
-            var roleViewModelJL = await _context.RoleViewModelJL
+            var agentViewModel = await _context.AgentViewModel
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (roleViewModelJL == null)
+            if (agentViewModel == null)
             {
                 return NotFound();
             }
 
-            return View(roleViewModelJL);
+            return View(agentViewModel);
         }
 
-        // POST: RolesJL/Delete/5
+        // POST: Agent/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.RoleViewModelJL == null)
+            if (_context.AgentViewModel == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.RoleViewModelJL'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.AgentViewModel'  is null.");
             }
-            var roleViewModelJL = await _context.RoleViewModelJL.FindAsync(id);
-            if (roleViewModelJL != null)
+            var agentViewModel = await _context.AgentViewModel.FindAsync(id);
+            if (agentViewModel != null)
             {
-                _context.RoleViewModelJL.Remove(roleViewModelJL);
+                _context.AgentViewModel.Remove(agentViewModel);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool RoleViewModelJLExists(int id)
+        private bool AgentViewModelExists(int id)
         {
-          return (_context.RoleViewModelJL?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.AgentViewModel?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

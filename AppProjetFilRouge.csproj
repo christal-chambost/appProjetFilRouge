@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspose.PDF" Version="23.1.1" />
+    <PackageReference Include="Aspose.PDF" Version="23.2.0" />
     <PackageReference Include="CKEditor" Version="3.6.4" />
     <PackageReference Include="CKeditor.Mvc" Version="3.6.5" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.3" />

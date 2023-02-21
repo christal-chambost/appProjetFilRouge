@@ -1,10 +1,10 @@
-﻿@model AppProjetFilRouge.Models.RoleViewModelJL
+﻿@model AppProjetFilRouge.Models.RoleViewModel
 
 @{
-    ViewData["Title"] = "Detail du role";
+    ViewData["Title"] = "Delete";
 }
 
-<h1>Detail du role</h1>
+<h1>Voulez-vous vraiment le supprimer ce role ?</h1>
 
 <hr />
 
@@ -14,33 +14,38 @@
         <dt class = "col-sm-5">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
+
         <dd class = "col-sm-5">
             @Html.DisplayFor(model => model.Name)
         </dd>
+
         <dt class = "col-sm-5">
             @Html.DisplayNameFor(model => model.NormalizedName)
         </dt>
+
         <dd class = "col-sm-5">
             @Html.DisplayFor(model => model.NormalizedName)
         </dd>
+
         <dt class = "col-sm-5">
             @Html.DisplayNameFor(model => model.ConcurrencyStamp)
         </dt>
+
         <dd class = "col-sm-5">
             @Html.DisplayFor(model => model.ConcurrencyStamp)
         </dd>
     </dl>
-</div>
 
-<hr />
+        <hr />
+  <div class="pfr-gestionNavbar d-flex justify-content-center m-5 p-4">
 
-    <div class="pfr-gestionNavbar d-flex justify-content-center m-5 p-4">
-
-         <div>
-             <a asp-action="Edit" class="btn btn-primary mt-3 text-white">Edition</a>
-             <a asp-action="Index" class="btn btn-primary mt-3 text-white">Gestion des roles</a>
-         </div>
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Supprimer" class="btn btn-danger mt-3 text-white" />
+            <a asp-action="Index" class="btn btn-danger mt-3 text-white">Gestion des roles</a>
+        </form>
 
     </div>
-
+    
+</div>
 <hr />
