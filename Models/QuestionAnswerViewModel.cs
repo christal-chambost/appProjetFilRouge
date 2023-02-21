@@ -7,6 +7,7 @@ namespace AppProjetFilRouge.Models
 {
     public class QuestionAnswerViewModel
     {
+
         [Key]
         [Column("questionanswer_id")]
         public int QuestionAnswerId { get; set; }

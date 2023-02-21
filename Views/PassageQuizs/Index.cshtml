@@ -8,24 +8,32 @@
 
 
 
-        <form asp-action="Index" asp-route-id="@Model.Quizz.QuizId" asp-route-questionId="@Model.Quizz.Questions.First().Questionid">
+        <form asp-action="Index" asp-route-quizId="@Model.Quizz.QuizId" asp-route-questionId="@Model.Question.Questionid">
 
             <div class="d-flex flex-column justify-content-center">
 
-
+@*
                     <h5>
                         @Html.DisplayFor(modelItem => Model.Quizz.Questions.First().Name)
-                    </h5>
+                    </h5>*@
                     <div class="d-flex">
-                <h6>@Html.DisplayFor(modelItem => Model.Quizz.Questions.First().QuestionType.Name)</h6>
+@*                      <h6>@Html.DisplayFor(modelItem => Model.Quizz.Questions.First().QuestionType.Name)</h6>
+*@
+                    <div class="d-flex flex-column">
 
-                        <div class="d-flex flex-column">
-                    @for (int i = 0; i <= Model.Quizz.Questions.First().QuestionAnswers.Count; i++)
+@*                    name="@Model.Answers[i].QuestionAnswerId"
+*@
+                    @for (int i = 0; i < Model.Answers.Count; i++)
                     {
-                                <div class="form-group">
-                            <input type="checkbox" name="@Model.Quizz.Questions.ToList()[0].QuestionAnswers.ToList()[i].QuestionAnswerId">
-                            <label for="@Model.Quizz.Questions.ToList()[0].QuestionAnswers.ToList()[i].QuestionAnswerId" class="control-label">@Model.Quizz.Questions.ToList()[0].QuestionAnswers.ToList()[i].Name</label>
-                                </div>
+                        <div class="form-group">
+                            <input type="checkbox" asp-for="@Model.Answers[i].IsChecked">
+                            <label asp-for="@Model.Answers[i].IsChecked" class="control-label">@Model.Answers[i].Name</label>
+                        </div>
+                        
+                        <input type="hidden" asp-for="@Model.Answers[i].QuestionAnswerId" />
+                        <input type="hidden" asp-for="@Model.Answers[i].QuestionId" />
+                        <input type="hidden" asp-for="@Model.Answers[i].Name" />
+
                     }
                         </div>
 

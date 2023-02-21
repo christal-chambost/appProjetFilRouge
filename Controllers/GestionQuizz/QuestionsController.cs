@@ -326,7 +326,7 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
                 QuestionType = question.QuestionType,
                 QuizId = question.QuizId,
                 Quiz = question.Quiz,
-                QuestionAnswers = question.QuestionAnswers,
+                QuestionAnswers = question.QuestionAnswers.ToList(),
 
             };
             return questionViewModel;

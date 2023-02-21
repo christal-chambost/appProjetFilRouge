@@ -11,14 +11,19 @@ namespace AppProjetFilRouge.Data.Entities
 		[Key]
 		[Column("userAnswer_id")]
 		public int UserAnswerId { get; set; }
-        //public virtual ICollection<QuestionAnswer> QuestionAnswers { get; set; } = null!;
 
-        //public virtual ICollection<Question> Questions { get; set; } = null!;
+        public string? Name { get; set; }
 
         [ForeignKey(nameof(QuestionId))]
         public int QuestionId { get; set; }
         public Question Question { get; set; } = null!;
 
-        //public ApplicationUser ApplicationUser { get; set; }
+        public bool? IsCorrect { get; set; }
+
+        public int quizId { get; set; }
+
+        public Quiz Quiz { get; set; }  
+
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }

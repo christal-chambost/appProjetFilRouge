@@ -161,6 +161,9 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QuizId"));
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime?>("DateCreation")
                         .HasColumnType("Date");
 
@@ -175,10 +178,15 @@ namespace AppProjetFilRouge.Data.Migrations
                     b.Property<int>("NbQuestions")
                         .HasColumnType("int");
 
+                    b.Property<int>("ResultQuiz")
+                        .HasColumnType("int");
+
                     b.Property<int>("TechnologyId")
                         .HasColumnType("int");
 
                     b.HasKey("QuizId");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("LevelId");
 
@@ -233,12 +241,28 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserAnswerId"));
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool?>("IsCorrect")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("QuestionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("quizId")
                         .HasColumnType("int");
 
                     b.HasKey("UserAnswerId");
 
+                    b.HasIndex("ApplicationUserId");
+
                     b.HasIndex("QuestionId");
+
+                    b.HasIndex("quizId");
 
                     b.ToTable("userAnswer");
                 });
@@ -701,7 +725,7 @@ namespace AppProjetFilRouge.Data.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<DateTime>("ABirthDate")
+                    b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
@@ -768,6 +792,10 @@ namespace AppProjetFilRouge.Data.Migrations
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Quiz", b =>
                 {
+                    b.HasOne("AppProjetFilRouge.Data.Entities.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("AppProjetFilRouge.Data.Entities.Level", "Level")
                         .WithMany("Quizzes")
                         .HasForeignKey("LevelId")
@@ -780,6 +808,8 @@ namespace AppProjetFilRouge.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("ApplicationUser");
+
                     b.Navigation("Level");
 
                     b.Navigation("Technology");
@@ -787,13 +817,27 @@ namespace AppProjetFilRouge.Data.Migrations
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.UserAnswer", b =>
                 {
+                    b.HasOne("AppProjetFilRouge.Data.Entities.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("AppProjetFilRouge.Data.Entities.Question", "Question")
                         .WithMany()
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("AppProjetFilRouge.Data.Entities.Quiz", "Quiz")
+                        .WithMany()
+                        .HasForeignKey("quizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
                     b.Navigation("Question");
+
+                    b.Navigation("Quiz");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

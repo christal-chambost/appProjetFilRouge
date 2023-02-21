@@ -30,6 +30,9 @@ namespace AppProjetFilRouge.Data.Entities
         public DateTime? DateCreation { get; set; }
 
         public virtual ICollection<Question>? Questions { get; set; }
-        //public ApplicationUser ApplicationUserId { get; set; }
+
+		public int ResultQuiz { get; set; }
+        
+		public ApplicationUser? ApplicationUser { get; set; }
     }
 }
