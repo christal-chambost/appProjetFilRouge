@@ -28,7 +28,7 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
         // GET: Quizs
         public async Task<IActionResult> Index()
         {
-            var quizzList = await _context.Quizzes.Include(q => q.Level).Include(q => q.Technology).ToListAsync();
+            var quizzList = await _context.Quizzes.Include(q => q.Level).Include(q => q.Technology).Include(q => q.ApplicationUser).ToListAsync();
 
             var listQuizzViewModel = new List<QuizzViewModel>();
 
@@ -67,8 +67,12 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
         // GET: Quizs/Create
         public IActionResult Create()
         {
+
+
             ViewData["LevelId"] = new SelectList(_context.Levels, "LevelId", "Name");
             ViewData["TechnologyId"] = new SelectList(_context.Technologies, "TechnologyId", "Name");
+            ViewData["ApplicationUserId"] = new SelectList(_context.ApplicationUsers, "Id", "LastName");
+
             return View();
         }
 
@@ -79,17 +83,21 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(QuizzViewModel quizzViewModel)
         {
+            var user = await _context.ApplicationUsers.Where(q => q.Id == quizzViewModel.ApplicationUser.Id).FirstOrDefaultAsync();
+
+            quizzViewModel.ApplicationUser = user;
 
             var quizz = CastToQuiz(quizzViewModel);
 
-            if (ModelState.IsValid)
-            {
+        
                 _context.Add(quizz);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
+           
             ViewData["LevelId"] = new SelectList(_context.Levels, "LevelId", "Name", quizz.LevelId);
             ViewData["TechnologyId"] = new SelectList(_context.Technologies, "TechnologyId", "Name", quizz.TechnologyId);
+            ViewData["ApplicationUserId"] = new SelectList(_context.ApplicationUsers, "Id", "LastName", quizz.ApplicationUser);
+
             return View(quizz);
         }
 
@@ -185,7 +193,7 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
         }
 
 
-        // GET: Quizs/Create
+        // GET: Quizs/GenerateQuiz
         public IActionResult GenerateQuiz()
         {
 
@@ -194,7 +202,7 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
             return View();
         }
 
-        // POST: Quizs/Create
+        // POST: Quizs/GenerateQuiz
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -259,6 +267,7 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
                 Questions = quizzViewModel.Questions,
                 NbQuestions = quizzViewModel.NbQuestions,
                 DateCreation = DateTime.Now,
+                ApplicationUser = quizzViewModel.ApplicationUser,
             };
             return quizz;
 
@@ -277,6 +286,7 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
                 Questions = quiz.Questions,
                 NbQuestions = quiz.NbQuestions,
                 DateCreation = DateTime.Now,
+                ApplicationUser = quiz.ApplicationUser,
             };
             return quizzViewModel;
         }

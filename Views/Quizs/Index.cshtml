@@ -19,7 +19,7 @@
 </div>
 
 
- <nav aria-label="Page navigation example">
+ <!--<nav aria-label="Page navigation example">
           <ul class="pagination">
             <li class="page-item"><a class="page-link" href="#">Previous</a></li>
             <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -27,7 +27,7 @@
             <li class="page-item"><a class="page-link" href="#">3</a></li>
             <li class="page-item"><a class="page-link" href="#">Next</a></li>
           </ul>
-</nav>
+</nav>-->
 
 <table class="table">
 
@@ -38,6 +38,7 @@
             <th scope="col">Technologie</th>
             <th scope="col">Niveau</th>
             <th scope="col">Nombre de questions</th>
+            <th scope="col">Candidat</th>
             <th scope="col">Actions</th>
         </tr>
     </thead>
@@ -53,6 +54,8 @@
                     <td>@Html.DisplayFor(modelItem => item.Technology.Name)</td>
                     <td>@Html.DisplayFor(modelItem => item.Level.Name)</td>
                     <td>@Html.DisplayFor(modelItem => item.NbQuestions)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ApplicationUser.FirstName) @Html.DisplayFor(modelItem => item.ApplicationUser.LastName)</td>
+
                     <td>
                             <a asp-action="Edit" asp-route-id="@item.QuizId" class="btn btn-sm btn-success text-white"><i class="bi bi-pencil-fill"></i></a>
                             <a asp-action="Details" asp-route-id="@item.QuizId" class="btn btn-sm btn-warning text-white"><i class="bi bi-menu-button-fill"></i></a>
@@ -61,21 +64,6 @@
                 </tr>
  
            }
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td> @Html.DisplayFor(modelItem => item.QuizId)</td>
-                <td> @Html.DisplayFor(modelItem => item.Name) </td>
-                <td> @Html.DisplayFor(modelItem => item.LevelId)</td>
-
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.QuizId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.QuizId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.QuizId">Delete</a>
-                </td>
-            </tr>
-        }
       
 
     </tbody>

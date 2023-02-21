@@ -43,7 +43,7 @@ namespace AppProjetFilRouge.Models
 
         public string? Correction { get; set; }
 
-        public ICollection<QuestionAnswer>? QuestionAnswers { get; set; } = null!;
+        public List<QuestionAnswer>? QuestionAnswers { get; set; } = null!;
 
 
         //public string? sortOrder { get; set; }

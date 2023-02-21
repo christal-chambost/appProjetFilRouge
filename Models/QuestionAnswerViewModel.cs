@@ -7,6 +7,7 @@ namespace AppProjetFilRouge.Models
 {
     public class QuestionAnswerViewModel
     {
+
         [Key]
         [Column("questionanswer_id")]
         public int QuestionAnswerId { get; set; }
@@ -18,7 +19,9 @@ namespace AppProjetFilRouge.Models
         public bool IsCorrect { get; set; }
 
         public int QuestionId { get; set; }
-        public Question Question { get; set; }
+        public Question? Question { get; set; }
+
+        public bool IsChecked { get; set; }
     }
 
 }
