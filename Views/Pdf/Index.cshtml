@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Page PDF";
+}
+
+
+@{
+    Html.BeginForm("CreateDocument", "Pdf", FormMethod.Get);
+    {
+        <div>
+            <input type="submit" value="Create PDF Document" style="width:200px;height:27px" />
+        </div>
+    }
+    Html.EndForm();
+}

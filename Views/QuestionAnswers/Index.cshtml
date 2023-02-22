@@ -1,46 +1,42 @@
 ﻿@model List<QuestionAnswerViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Gestion des réponses";
 }
 
-<h1>Index</h1>
+<h1 class="display-4">Gestion des réponses</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
+<div class="pfr-gestionNavbar d-flex justify-content-start m-2 p-4">
+    <a asp-area="" asp-controller="Quizs" asp-action="Index">Quiz</a>
+    <a asp-area="" asp-controller="Questions" asp-action="Index" >Questions</a>
+    <a asp-area="" asp-controller="QuestionAnswers" asp-action="Index" class="active">Réponses</a>
+    <a asp-area="" asp-controller="Technologies" asp-action="Index" >Technologies</a>
+    <a asp-area="" asp-controller="Levels" asp-action="Index" >Niveaux</a>
+    <a asp-area="" asp-controller="QuestionTypes" asp-action="Index">Types de question</a>
+</div>
+
+<table class="table table-hover">
+
+        <thead>
         <tr>
-            <th>
-               Intitulé du choix
-            </th>
-            <th>
-               est une bonne réponse ?
-            </th>
-            <th>
-              Question
-            </th>
-            <th></th>
+            <th scope="col">Intitulé de la réponse</th>
+            <th scope="col">Est correcte ?</th>
+            <th scope="col">Question rattachée</th>
+            <th scope="col">Actions</th>
         </tr>
     </thead>
+
     <tbody>
         @foreach (var item in Model)
         {
+
             <tr>
+                <th scope="row"> @Html.DisplayFor(modelItem => item.Name)</th>
+                <td>@Html.DisplayFor(modelItem => item.IsCorrect)</td>
+                <td>@Html.DisplayFor(modelItem => item.Question.Name)</td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsCorrect)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Question.Name)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.QuestionAnswerId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.QuestionAnswerId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.QuestionAnswerId">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.QuestionAnswerId" class="btn btn-sm btn-success text-white"><i class="bi bi-pencil-fill"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.QuestionAnswerId" class="btn btn-sm btn-danger text-white"><i class="bi bi-x-lg"></i></a>
                 </td>
             </tr>
         }

@@ -1,12 +1,10 @@
 ﻿@model AppProjetFilRouge.Models.QuizzViewModel
 
 @{
-    ViewData["Title"] = "Ajouter un Quiz";
+    ViewData["Title"] = "Créer un Quiz";
 }
 
-<h1>Ajouter un Quiz</h1>
-
-<hr />
+<h1>Créer un Quiz</h1>
 
 <div class="row d-flex justify-content-center">
     <div class="col-md-4">
@@ -30,7 +28,7 @@
                 <select asp-for="LevelId" class ="form-control" asp-items="ViewBag.LevelId"></select>
             </div>
             <div class="form-group my-3">
-                <label asp-for="ApplicationUser.Id" class="control-label fw-bold"></label>
+                <label asp-for="ApplicationUser.Id" class="control-label fw-bold">Candidat</label>
                 <select asp-for="ApplicationUser.Id" class ="form-control" asp-items="@ViewBag.ApplicationUserId"></select>
             </div>
             <div class="form-group my-3">
@@ -41,18 +39,17 @@
 
             <hr />
 
-            <div class="form-group my-3">
-                <input type="submit" value="Ajouter" class="btn btn-primary mt-3 text-white"/>
-                <button type="submit" formaction="@Url.Action("GenerateQuiz")" class="btn btn-primary mt-3 text-white">Generate Quiz</button>
-                <a asp-action="Index" class="btn btn-primary mt-3 text-white">Gestion du Quiz</a>
+            <div class="d-flex justify-content-between form-group my-3">
+                <input type="submit" value="Ajouter" class="btn pfr-btn text-white" />
+                <button type="submit" formaction="@Url.Action("GenerateQuiz")" class="btn pfr-btn text-white">Générer un Quiz</button>
             </div>
 
-
-
         </form>
+
     </div>
+    <a asp-action="Index"><i class="bi bi-arrow-left"></i> Retour</a>
+
 </div>
-<hr />
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

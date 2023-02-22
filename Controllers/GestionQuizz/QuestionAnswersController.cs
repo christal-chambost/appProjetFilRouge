@@ -54,9 +54,9 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
         }
 
         [HttpGet]
-        [Route("/Questions/{questionid}/QuestionAnswers")]
+        [Route("/QuestionAnswer/{questionId}/{questionTypeId}/")]
         // GET: QuestionAnswers/Create
-        public IActionResult Create(int questionId)
+        public IActionResult Create(int questionId, int questionTypeId)
         {
       
             var questionAnswerCheckbox = new List<QuestionAnswerViewModel>();
@@ -73,7 +73,7 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
                 });
             }
 
-            ViewData["QuestionTypeId"] = _context.Questions.Where(q => q.Questionid == questionId).Select(q => q.QuestionTypeId);
+            ViewData["QuestionTypeId"] = questionTypeId;
             ViewData["QuestionId"] = new SelectList(_context.Questions, "Questionid", "Name");
            
             return View(questionAnswerCheckbox);
@@ -83,9 +83,9 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Route("/Questions/{Questionid}/QuestionAnswers")]
+        [Route("/QuestionAnswer/{questionId}/{questionTypeId}/")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int questionId, List<QuestionAnswerViewModel> questionAnswerViewModel)
+        public async Task<IActionResult> Create(int questionId, int questionTypeId, List<QuestionAnswerViewModel> questionAnswerViewModel)
         {
 
             var listQuestionAnswer = new List<QuestionAnswer>();

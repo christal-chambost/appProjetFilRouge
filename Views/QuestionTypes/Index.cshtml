@@ -1,35 +1,41 @@
 ﻿@model List<QuestionTypeViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Type de question";
 }
 
-<h1>Index</h1>
+<h1 class="display-4">Gestion des types de question</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<div class="pfr-gestionNavbar d-flex justify-content-start m-2 p-4">
+    <a asp-area="" asp-controller="Quizs" asp-action="Index">Quiz</a>
+    <a asp-area="" asp-controller="Questions" asp-action="Index" >Questions</a>
+    <a asp-area="" asp-controller="QuestionAnswers" asp-action="Index" >Réponses</a>
+    <a asp-area="" asp-controller="Technologies" asp-action="Index" >Technologies</a>
+    <a asp-area="" asp-controller="Levels" asp-action="Index" >Niveaux</a>
+    <a asp-area="" asp-controller="QuestionTypes" asp-action="Index" class="active">Types de question</a>
+</div>
+
+<div class="d-flex justify-content-lg-end p-4">
+    <a asp-area="" asp-controller="QuestionTypes" asp-action="Create" class="btn pfr-btn me-5 text-white"><i class="bi bi-plus-circle"></i> Ajout d'un type</a>
+</div>
+
+<table class="table table-hover">
     <thead>
         <tr>
-            <th>
-                Intitulé
-            </th>
-            <th></th>
+            <th scope="col">Intitulé</th>
+            <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.QuestionTypeId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.QuestionTypeId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.QuestionTypeId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.QuestionTypeId" class="btn btn-sm btn-success text-white"><i class="bi bi-pencil-fill"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.QuestionTypeId" class="btn btn-sm btn-danger text-white"><i class="bi bi-x-lg"></i></a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

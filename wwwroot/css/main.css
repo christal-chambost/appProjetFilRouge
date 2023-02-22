@@ -45,6 +45,11 @@ html {
     background-color: rgba(var(--colorPrimary),1);
 }
 
+.pfr-bg-quiz {
+    background-color: rgba(var(--colorLight),1);
+    border-radius: 10px;
+}
+
 .pfr-text-light {
     color: rgba(var(--colorLight),0.8);
 }
@@ -99,6 +104,49 @@ a, a:visited {
         color: rgba(var(--colorLight),1);
     }
 
-.pfr-gestionNavbar {
-    background-color: #f0f0f0;
+.pfr-main-content {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.pfr-gestionNavbar a {
+    position: relative;
+    margin: 0 10px;
+}
+
+    .pfr-gestionNavbar a.active {
+        border-bottom: 2px solid orange;
+        
+    }
+
+        .pfr-gestionNavbar a.active:before {
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #333;
+            transition: width 0.3s ease-in-out;
+        }
+
+    .pfr-gestionNavbar a:hover:before {
+        width: 100%;
+    }
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--colorPrimary),1);
+}
+
+
+::-webkit-scrollbar-track {
+    background-color: rgba(var(--colorLight), 1);
 }

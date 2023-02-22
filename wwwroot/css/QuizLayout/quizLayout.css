@@ -1,0 +1,20 @@
+﻿body {
+    background-color: rgba(var(--colorPrimary),1);
+    color: rgba(var(--colorDark),1);
+}
+
+
+.pfr-bg-quiz {
+    max-width: 500px;
+    max-height: 90vh;
+}
+
+.pfr-check {
+    padding: 5px 20px;
+}
+
+    .pfr-check:hover {
+        background-color: #ffc107;
+        padding: 5px 20px;
+        border-radius: 10px;
+    }

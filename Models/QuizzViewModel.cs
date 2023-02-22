@@ -29,7 +29,7 @@ namespace AppProjetFilRouge.Models
         [ForeignKey(nameof(LevelId))]
 
         [Required]
-        [DisplayName("Niveaux")]
+        [DisplayName("Niveau")]
         [Column("name", TypeName = "varchar(500)")]
         public int LevelId { get; set; }
 
