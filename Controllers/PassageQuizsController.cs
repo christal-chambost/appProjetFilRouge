@@ -113,8 +113,6 @@ namespace AppProjetFilRouge.Controllers
             } 
             else
             {
-                //Récupérer toutes les réponses du user
-                //Récupérer les réponses correctes
 
                 var resultQuiz = await CalculResultQuiz(quizId);
 
@@ -126,18 +124,10 @@ namespace AppProjetFilRouge.Controllers
                 return View("EndQuiz");
             };
 
-            
-               
-           
-
-            //if (userAnswer.NextQuestionId == null)
-            //{
-            //    return Content("Merci d'avoir répondu au quiz !");
-            //}
-
-            //return View();
         }
 
+
+        // Fonction pour calculer le résultat du quiz
         private async Task<int> CalculResultQuiz(int quizId)
         {
             int score = 0;

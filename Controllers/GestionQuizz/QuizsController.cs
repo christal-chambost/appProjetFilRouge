@@ -194,17 +194,15 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
 
 
         // GET: Quizs/GenerateQuiz
-        public IActionResult GenerateQuiz()
+        /*public IActionResult GenerateQuiz()
         {
 
             ViewData["LevelId"] = new SelectList(_context.Levels, "LevelId", "Name");
             ViewData["TechnologyId"] = new SelectList(_context.Technologies, "TechnologyId", "Name");
             return View();
-        }
+        }*/
 
         // POST: Quizs/GenerateQuiz
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> GenerateQuiz(QuizzViewModel quizzViewModel)
@@ -249,6 +247,33 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
             return View(quizz);
         }
 
+        public IActionResult ResultQuiz(int id)
+        {
+            //Je veux récupérer le useranswer where Id du user = user du quiz 
+            //var quiz = _context.Quizzes.Where(q => q.QuizId == id).Include(q => q.U)
+            var result = _context.UserAnswers.Include(q => q.Quiz).Include(q => q.Question).Include(q => q.ApplicationUser).Where(q => q.quizId == id).ToList();
+
+            var resultQuizViewModelList = new List<ResultQuizViewModel>();
+
+            foreach (UserAnswer resultQuiz in result) {
+
+                var resultQuizViewModel = new ResultQuizViewModel
+                {
+                    UserAnswerId = resultQuiz.UserAnswerId,
+                    QuestionId = resultQuiz.QuestionId,
+                    Question = resultQuiz.Question,
+                    IsCorrect = resultQuiz.IsCorrect,
+                    ApplicationUser = resultQuiz.ApplicationUser,
+                    Quiz = resultQuiz.Quiz,
+                };
+
+                resultQuizViewModelList.Add(resultQuizViewModel);
+            }
+
+
+            return View(resultQuizViewModelList);
+        }
+
         private bool QuizExists(int id)
         {
             return (_context.Quizzes?.Any(e => e.QuizId == id)).GetValueOrDefault();
@@ -268,6 +293,7 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
                 NbQuestions = quizzViewModel.NbQuestions,
                 DateCreation = DateTime.Now,
                 ApplicationUser = quizzViewModel.ApplicationUser,
+                ResultQuiz = quizzViewModel.ResultQuiz,
             };
             return quizz;
 
@@ -287,6 +313,7 @@ namespace AppProjetFilRouge.Controllers.GestionQuizz
                 NbQuestions = quiz.NbQuestions,
                 DateCreation = DateTime.Now,
                 ApplicationUser = quiz.ApplicationUser,
+                ResultQuiz = quiz.ResultQuiz,
             };
             return quizzViewModel;
         }

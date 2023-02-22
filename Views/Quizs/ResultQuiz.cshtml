@@ -1,0 +1,73 @@
+﻿@model List<ResultQuizViewModel>
+
+@{
+    ViewData["Title"] = "Résultat";
+}
+
+<div class="d-flex justify-content-between m-2 align-items-center">
+    <h1>Résultat du quiz n° @Model[0].Quiz.QuizId</h1>
+    <button id="downloadPDF" class="btn btn-danger">Télécharger en PDF</button>
+</div>
+
+<div id="toPdf">
+<div><strong>Intitulé du quiz :</strong> @Model[0].Quiz.Name</div>
+<div><strong>Candidat :</strong> @Model[0].ApplicationUser.FirstName @Model[0].ApplicationUser.LastName</div>
+
+<div class="d-flex justify-content-center m-4 text-uppercase fs-3">Résultat : @Model[0].Quiz.ResultQuiz/@Model[0].Quiz.NbQuestions</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Question</th>
+            <th scope="col">Réponse</th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>@item.Question.Name</td>
+                <td>@(item.IsCorrect == true ? "Correct" : "Incorrect")</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+</div>
+
+<script>
+    var toPdf = document.getElementById('toPdf');
+    var monButton = document.getElementById('downloadPDF');
+
+    monButton.onclick = () => {
+        window.jsPDF = window.jspdf.jsPDF;
+
+        html2canvas(document.getElementById('toPdf')).then(function (canvas) {
+            let newCanvasImg = canvas.toDataURL('image/PNG', 1.0);
+            let doc = new jsPDF('landscape');
+            doc.setFontSize(14);
+            doc.internal.scaleFactor = 30;
+            let width = doc.internal.pageSize.getWidth();
+            let height = doc.internal.pageSize.getHeight();
+            let imageWidth = width - 75;
+            let imageHeight = 150;
+            let x = (width - imageWidth) / 2;
+            let y = (height - imageHeight) / 2;
+            doc.addImage(
+                newCanvasImg,
+                'PNG',
+                x,
+                y,
+                imageWidth,
+                imageHeight,
+                'NONE',
+                'NONE'
+            );
+            doc.save(`monpdf.pdf`)
+        })
+
+    }
+</script>

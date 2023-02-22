@@ -39,7 +39,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasKey("CompanyId");
 
-                    b.ToTable("companies", (string)null);
+                    b.ToTable("companies");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Level", b =>
@@ -58,7 +58,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasKey("LevelId");
 
-                    b.ToTable("levels", (string)null);
+                    b.ToTable("levels");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Question", b =>
@@ -103,7 +103,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasIndex("TechnologyId");
 
-                    b.ToTable("questions", (string)null);
+                    b.ToTable("questions");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.QuestionAnswer", b =>
@@ -130,7 +130,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("questionAnswers", (string)null);
+                    b.ToTable("questionAnswers");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.QuestionType", b =>
@@ -149,7 +149,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasKey("QuestionTypeId");
 
-                    b.ToTable("questionTypes", (string)null);
+                    b.ToTable("questionTypes");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Quiz", b =>
@@ -178,7 +178,7 @@ namespace AppProjetFilRouge.Data.Migrations
                     b.Property<int>("NbQuestions")
                         .HasColumnType("int");
 
-                    b.Property<int>("ResultQuiz")
+                    b.Property<int?>("ResultQuiz")
                         .HasColumnType("int");
 
                     b.Property<int>("TechnologyId")
@@ -192,7 +192,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasIndex("TechnologyId");
 
-                    b.ToTable("quizzes", (string)null);
+                    b.ToTable("quizzes");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.QuizResult", b =>
@@ -210,7 +210,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasKey("QuizResultId");
 
-                    b.ToTable("quizResult", (string)null);
+                    b.ToTable("quizResult");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.Technology", b =>
@@ -229,7 +229,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasKey("TechnologyId");
 
-                    b.ToTable("technologies", (string)null);
+                    b.ToTable("technologies");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Data.Entities.UserAnswer", b =>
@@ -264,7 +264,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasIndex("quizId");
 
-                    b.ToTable("userAnswer", (string)null);
+                    b.ToTable("userAnswer");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Models.AgentViewModel", b =>
@@ -298,7 +298,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AgentViewModel", (string)null);
+                    b.ToTable("AgentViewModel");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Models.AgentViewModelJL", b =>
@@ -332,7 +332,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AgentViewModelJL", (string)null);
+                    b.ToTable("AgentViewModelJL");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Models.CandidatViewModel", b =>
@@ -370,7 +370,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CandidatViewModel", (string)null);
+                    b.ToTable("CandidatViewModel");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Models.CandidatViewModelJL", b =>
@@ -460,7 +460,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CandidatViewModelJL", (string)null);
+                    b.ToTable("CandidatViewModelJL");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Models.RoleViewModel", b =>
@@ -484,7 +484,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RoleViewModel", (string)null);
+                    b.ToTable("RoleViewModel");
                 });
 
             modelBuilder.Entity("AppProjetFilRouge.Models.RoleViewModelJL", b =>
@@ -508,7 +508,7 @@ namespace AppProjetFilRouge.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RoleViewModelJL", (string)null);
+                    b.ToTable("RoleViewModelJL");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

@@ -44,7 +44,7 @@ namespace AppProjetFilRouge.Models
 
         public ICollection<Question>? Questions { get; set; }
 
-        public int ResultQuiz { get; set; }
+        public int? ResultQuiz { get; set; }
 
         public ApplicationUser? ApplicationUser { get; set; }
 
