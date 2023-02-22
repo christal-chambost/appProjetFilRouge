@@ -14,10 +14,11 @@ namespace AppProjetFilRouge.Data.Entities
 		[Required]
 		[Column("text", TypeName = "varchar(5000)")]
 		public string Name { get; set; } = null!;
+
 		public bool IsCorrect { get; set; }
 
         public int QuestionId { get; set; }
-        public Question Question { get; set; } = null!;
+        public Question? Question { get; set; } 
 
     }
 }
