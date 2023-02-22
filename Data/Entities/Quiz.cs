@@ -31,7 +31,7 @@ namespace AppProjetFilRouge.Data.Entities
 
         public virtual ICollection<Question>? Questions { get; set; }
 
-		public int ResultQuiz { get; set; }
+		public int? ResultQuiz { get; set; }
         
 		public ApplicationUser? ApplicationUser { get; set; }
     }
