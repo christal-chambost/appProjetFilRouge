@@ -1,12 +1,10 @@
 ﻿@model AppProjetFilRouge.Models.QuizzViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edition du quiz";
 }
 
 <h1>Edition du quiz</h1>
-
-<hr />
 
 <div class="row d-flex justify-content-center">
     <div class="col-md-4">
@@ -40,16 +38,15 @@
 
              <hr />
 
-            <div class="form-group my-3">
-                <input type="submit" value="Sauvegarder" class="btn btn-primary mt-3 text-white" />
-                <a asp-action="Index" class="btn btn-primary mt-3 text-white">Gestion du Quiz</a>
+            <div class="d-flex justify-content-center form-group my-3">
+                <input type="submit" value="Sauvegarder" class="btn pfr-btn me-5 text-white" />
             </div>
 
         </form>
-
     </div>
+    <a asp-action="Index"><i class="bi bi-arrow-left"></i> Retour</a>
+
 </div>
-<hr />
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

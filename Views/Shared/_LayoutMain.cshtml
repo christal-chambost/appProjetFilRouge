@@ -40,14 +40,14 @@
 							</li>
 						</ul>
 						<hr>
-						<div class="m-2">
+						<div class="m-2 sticky-bottom">
 							<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
 								<button type="submit" class="pfr-logout nav-link btn btn-link btn-outline-light pfr-text-light d-flex align-items-center"><i class="fs-6 bi-box-arrow-left pe-2"></i> Se déconnecter</button>
 							</form>
 						</div>
 					</div>
 				</div>
-				<div class="col py-3 pfr-bg-light-radius">
+				<div class="pfr-main-content col py-3 pfr-bg-light-radius">
 					<main role="main">
 						@RenderBody()
 					</main>

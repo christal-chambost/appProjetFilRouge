@@ -2,34 +2,25 @@
 
 @{
     ViewData["Title"] = "Gestion des Quiz";
+    string pdf = null;
 }
 
 <h1 class="display-4">Gestion des quiz</h1>
 
-<div class="pfr-gestionNavbar d-flex justify-content-center m-5 p-4">
-    <a asp-area="" asp-controller="Technologies" asp-action="Index" class="btn pfr-btn me-5 text-white">Gestion des technologies</a>
-    <a asp-area="" asp-controller="Levels" asp-action="Index" class="btn pfr-btn me-5 text-white">Gestion des niveaux</a>
-    <a asp-area="" asp-controller="QuestionTypes" asp-action="Index" class="btn pfr-btn me-5 text-white">Gestion des types de questions </a>
-    <a asp-area="" asp-controller="Questions" asp-action="Index" class="btn pfr-btn me-5 text-white">Gestion des questions</a>
-    <a asp-area="" asp-controller="" asp-action="Index" class="btn pfr-btn me-5 text-white">Gestion des choix</a>
+<div class="pfr-gestionNavbar d-flex justify-content-start m-2 p-4">
+    <a asp-area="" asp-controller="Quizs" asp-action="Index" class="active">Quiz</a>
+    <a asp-area="" asp-controller="Questions" asp-action="Index">Questions</a>
+    <a asp-area="" asp-controller="QuestionAnswers" asp-action="Index">Réponses</a>
+    <a asp-area="" asp-controller="Technologies" asp-action="Index">Technologies</a>
+    <a asp-area="" asp-controller="Levels" asp-action="Index">Niveaux</a>
+    <a asp-area="" asp-controller="QuestionTypes" asp-action="Index">Types de question</a>
 </div>
 
-<div class="pfr-gestionNavbar d-flex justify-content-lg-end m-5 p-4">
-    <a asp-area="" asp-controller="Quizs" asp-action="Create" class="btn pfr-btn me-5 text-white">Ajout d'un quiz</a>
+<div class="d-flex justify-content-lg-end p-4">
+    <a asp-area="" asp-controller="Quizs" asp-action="Create" class="btn pfr-btn me-5 text-white"><i class="bi bi-plus-circle"></i> Ajout d'un quiz</a>
 </div>
 
-
- <!--<nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-          </ul>
-</nav>-->
-
-<table class="table">
+<table class="table table-hover">
 
     <thead>
         <tr>
@@ -46,25 +37,26 @@
     <tbody>
 
 
-          @foreach (var item in Model)
-           {
-                <tr>
-                    <th scope="row">@Html.DisplayFor(modelItem => item.QuizId)</th>
-                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Technology.Name)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Level.Name)</td>
-                    <td>@Html.DisplayFor(modelItem => item.NbQuestions)</td>
-                    <td>@Html.DisplayFor(modelItem => item.ApplicationUser.FirstName) @Html.DisplayFor(modelItem => item.ApplicationUser.LastName)</td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@Html.DisplayFor(modelItem => item.QuizId)</th>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Technology.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Level.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.NbQuestions)</td>
+                <td>@Html.DisplayFor(modelItem => item.ApplicationUser.FirstName) @Html.DisplayFor(modelItem => item.ApplicationUser.LastName)</td>
 
-                    <td>
-                            <a asp-action="Edit" asp-route-id="@item.QuizId" class="btn btn-sm btn-success text-white"><i class="bi bi-pencil-fill"></i></a>
-                            <a asp-action="Details" asp-route-id="@item.QuizId" class="btn btn-sm btn-warning text-white"><i class="bi bi-menu-button-fill"></i></a>
-                            <a asp-action="Delete" asp-route-id="@item.QuizId" class="btn btn-sm btn-danger text-white"><i class="bi bi-x-lg"></i></a>
-                    </td>
-                </tr>
- 
-           }
-      
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.QuizId" class="btn btn-sm btn-success text-white"><i class="bi bi-pencil-fill"></i></a>
+                    <a asp-action="Details" asp-route-id="@item.QuizId" class="btn btn-sm btn-warning text-white"><i class="bi bi-menu-button-fill"></i></a>
+                    <a asp-action="" asp-route-id="" class="btn btn-sm btn @(pdf == null ? "btn-secondary" : "btn-info") text-white"><i class="bi bi-filetype-pdf"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.QuizId" class="btn btn-sm btn-danger text-white"><i class="bi bi-x-lg"></i></a>
+                </td>
+            </tr>
+
+        }
+
 
     </tbody>
 

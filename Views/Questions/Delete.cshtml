@@ -1,15 +1,12 @@
 ﻿@model AppProjetFilRouge.Models.QuestionViewModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Suppression";
 }
 
-<h1>Delete</h1>
+<h1>Voulez-vous vraiment supprimer cette question ?</h1>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Question</h4>
-    <hr />
+<div class="pfr-gestionNavbar d-flex flex-column justify-content-center m-5 p-4">
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
@@ -42,10 +39,14 @@
             @Html.DisplayFor(model => model.QuestionType.Name)
         </dd>
     </dl>
-    
+
+    <div class="pfr-gestionNavbar d-flex justify-content-center m-5 p-4">
     <form asp-action="Delete">
         <input type="hidden" asp-for="Questionid" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Supprimer" class="btn btn-danger" /> 
     </form>
+    </div>
+
+    <a asp-action="Index"><i class="bi bi-arrow-left"></i> Retour</a>
+
 </div>
