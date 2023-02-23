@@ -14,7 +14,7 @@ namespace AppProjetFilRouge.Models
         public int Id { get; set; }
 
         [Required]
-        [DisplayName("Non d'utilisateur")]
+        [DisplayName("Nom d'utilisateur")]
         //[Column("name", TypeName = "varchar(256)")]
         public string? UserName { get; set; }
 
@@ -24,7 +24,7 @@ namespace AppProjetFilRouge.Models
         public string? FirstName { get; set; }
 
         [Required]
-        [DisplayName("Nom de Famille")]
+        [DisplayName("Nom")]
         //[Column("name", TypeName = "varchar(75)")]
         public string? LastName { get; set; }
 
@@ -39,6 +39,8 @@ namespace AppProjetFilRouge.Models
         public string? PhoneNumber { get; set; }
 
         [Required]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
         [DisplayName("Date de naissance")]
         public DateTime? ABirthDate { get; set; }
 

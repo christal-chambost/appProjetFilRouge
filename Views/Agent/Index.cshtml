@@ -7,53 +7,33 @@
 <h1>Gestion des agents</h1>
 
 
-
-<div class="pfr-gestionNavbar d-flex justify-content-center m-5 p-4">
-    <a asp-area="" asp-controller="Technologies" asp-action="Index" class="btn pfr-btn me-5 text-white">Gestion des technologies</a>
-    <a asp-area="" asp-controller="Levels" asp-action="Index" class="btn pfr-btn me-5 text-white">Gestion des niveaux</a>
-    <a asp-area="" asp-controller="QuestionTypes" asp-action="Index" class="btn pfr-btn me-5 text-white">Gestion des types de questions </a>
-    <a asp-area="" asp-controller="Questions" asp-action="Index" class="btn pfr-btn me-5 text-white">Gestion des questions</a>
-    <a asp-area="" asp-controller="" asp-action="Index" class="btn pfr-btn me-5 text-white">Gestion des choix</a>
+<div class="d-flex justify-content-lg-end p-4">
+    <a asp-area="" asp-controller="Agent" asp-action="Create" class="btn pfr-btn me-5 text-white"><i class="bi bi-plus-circle"></i> Ajout d'un agent</a>
 </div>
 
-<div class="pfr-gestionNavbar d-flex justify-content-lg-end m-5 p-4">
-    <a asp-area="" asp-controller="Agent" asp-action="Create" class="btn pfr-btn me-5 text-white">Ajout d'un agent</a>
-</div>
-
- <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-          </ul>
-</nav>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<table class="table table-hover">
     <thead>
         <tr>
+            <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+            <th>@Html.DisplayNameFor(model => model.LastName)</th>
             <th>@Html.DisplayNameFor(model => model.UserName)</th>
             <th>@Html.DisplayNameFor(model => model.Email)</th>
             <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
-            <th>@Html.DisplayNameFor(model => model.FirstName)</th>
-            <th>@Html.DisplayNameFor(model => model.LastName)</th>
             <th></th>
         </tr>
 
     </thead>
 
     <tbody>
-        @foreach (var item in Model) {
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => item.UserName)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                    <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
-                    <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
-                    <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                <td>@Html.DisplayFor(modelItem => item.UserName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+
 
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-success text-white"><i class="bi bi-pencil-fill"></i></a>
@@ -61,7 +41,7 @@
                     <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger text-white"><i class="bi bi-x-lg"></i></a>
                 </td>
 
-                </tr>
+            </tr>
         }
     </tbody>
 </table>
