@@ -19,8 +19,8 @@ namespace AppProjetFilRouge.Controllers
         }
 
         [HttpGet]
-        [Route("/Passage/{quizId}/{questionId}/{questionCourante}")]
-        public async Task<IActionResult> Index(int quizId, int? questionId, int questionCourante = 0)
+        [Route("/Passage/{quizId}/{questionId}/{numeroCourant}")]
+        public async Task<IActionResult> Index(int quizId, int? questionId, int numeroCourant = 0)
         {
 
             //var data = repository.GetPassageData(id, questionId);
@@ -38,13 +38,16 @@ namespace AppProjetFilRouge.Controllers
                 return NotFound();
             }
 
+            ViewData["NumeroCourant"] = numeroCourant;
+
+
             //return View(data);
             return View(CastToQuizzViewModel(quizById));
         }
 
         [HttpPost]
-        [Route("/Passage/{quizId}/{questionId}/{questionCourante}")]
-        public async Task<IActionResult> Index(int quizId, int questionId, PassageQuizViewModel passageQuizViewModel, int questionCourante = 0)
+        [Route("/Passage/{quizId}/{questionId}/{numeroCourant}")]
+        public async Task<IActionResult> Index(int quizId, int questionId, PassageQuizViewModel passageQuizViewModel, int numeroCourant = 0)
         {
 
             // Récupere le quizz actuel
@@ -62,7 +65,7 @@ namespace AppProjetFilRouge.Controllers
             }
 
             
-            if (questionCourante < questionIdList.Count - 1)
+            if (numeroCourant < questionIdList.Count - 1)
             {
                 var quizQuestionAnswer = passageQuizViewModel;
 
@@ -107,13 +110,12 @@ namespace AppProjetFilRouge.Controllers
                 await _context.UserAnswers.AddAsync(userAnswer);
                 _context.SaveChangesAsync();
 
-                questionCourante++;
+                numeroCourant++;
 
-                return RedirectToAction("Index", new { quizId = quizId, questionId = questionIdList[questionCourante], questionCourante = questionCourante });
+                return RedirectToAction("Index", new { quizId = quizId, questionId = questionIdList[numeroCourant], numeroCourant = numeroCourant });
             } 
             else
             {
-
                 var resultQuiz = await CalculResultQuiz(quizId);
 
                 var columnResultQuiz = await _context.Quizzes.Where(q => q.QuizId == quizId).FirstOrDefaultAsync();

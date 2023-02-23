@@ -2,6 +2,9 @@
 
 @{
     Layout = "_LayoutQuiz";
+
+    int NumeroCourant = (int)ViewData["NumeroCourant"];
+    int percentage = (int)(((double)NumeroCourant + 1) / Model.Quizz.NbQuestions * 100);
 }
 
 
@@ -17,12 +20,12 @@
     </div>
 
     <div class="m-5">
-        <div class="progress" style="height: 0.5rem;" role="progressbar" aria-label="Warning example" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar bg-warning" style="width: 10%"></div>
+        <div class="progress" style="height: 0.5rem;" role="progressbar" aria-label="Warning example" aria-valuenow="@(NumeroCourant + 1)" aria-valuemin="0" aria-valuemax="@(Model.Quizz.NbQuestions)">
+            <div class="progress-bar bg-warning" style="width: @percentage%"></div>
         </div>
     </div>
     <h3 class="mx-4">
-        @Model.Question.Name
+        Question @(NumeroCourant + 1) : @Model.Question.Name
     </h3>
 
     <div class="d-flex flex-column justify-content-center p-5">

@@ -14,7 +14,7 @@ namespace AppProjetFilRouge.Models
         public int Id { get; set; }
 
         [Required]
-        [DisplayName("Non d'utilisateur")]
+        [DisplayName("Nom d'utilisateur")]
         //[Column("name", TypeName = "varchar(256)")]
         public string? UserName { get; set; }
 

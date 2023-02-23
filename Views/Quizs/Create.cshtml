@@ -20,16 +20,16 @@
 
             <div class="form-group my-3">
                 <label asp-for="TechnologyId" class="control-label fw-bold"></label>
-                <select asp-for="TechnologyId" class ="form-control" asp-items="ViewBag.TechnologyId"></select>
+                <select asp-for="TechnologyId" class="form-control" asp-items="ViewBag.TechnologyId"></select>
             </div>
 
             <div class="form-group my-3">
                 <label asp-for="LevelId" class="control-label fw-bold"></label>
-                <select asp-for="LevelId" class ="form-control" asp-items="ViewBag.LevelId"></select>
+                <select asp-for="LevelId" class="form-control" asp-items="ViewBag.LevelId"></select>
             </div>
             <div class="form-group my-3">
                 <label asp-for="ApplicationUser.Id" class="control-label fw-bold">Candidat</label>
-                <select asp-for="ApplicationUser.Id" class ="form-control" asp-items="@ViewBag.ApplicationUserId"></select>
+                <select asp-for="ApplicationUser.Id" class="form-control" asp-items="@ViewBag.ApplicationUserId"></select>
             </div>
             <div class="form-group my-3">
                 <label asp-for="NbQuestions" class="control-label fw-bold"></label>
@@ -41,16 +41,15 @@
 
             <div class="d-flex justify-content-between form-group my-3">
                 <input type="submit" value="Ajouter" class="btn pfr-btn text-white" />
-                <button type="submit" formaction="@Url.Action("GenerateQuiz")" class="btn pfr-btn text-white">Générer un Quiz</button>
+                <input type="submit" name="action" value="Générer un quiz" class="btn pfr-btn text-white" />
             </div>
-
         </form>
-
     </div>
     <a asp-action="Index"><i class="bi bi-arrow-left"></i> Retour</a>
-
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

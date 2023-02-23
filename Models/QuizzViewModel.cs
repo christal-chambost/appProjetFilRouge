@@ -23,7 +23,6 @@ namespace AppProjetFilRouge.Models
         [ForeignKey(nameof(TechnologyId))]
         public int TechnologyId { get; set; }
 
-
         public Technology? Technology { get; set; } 
 
         [ForeignKey(nameof(LevelId))]
